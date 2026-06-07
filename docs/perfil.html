@@ -51,36 +51,61 @@ section{position:relative}
 .moreBtn{font-family:var(--fs);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;background:transparent;color:var(--accent);
   border:1px solid var(--accent);border-radius:999px;padding:.65rem 1.4rem;cursor:pointer;transition:background .2s,color .2s;display:inline-flex;align-items:center;gap:.6rem}
 .moreBtn:hover{background:var(--accent);color:#0c0b0a}
-.moreBtn .d{width:6px;height:6px;border-radius:50%;background:currentColor}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:5vw;max-height:0;overflow:hidden;opacity:0;transition:max-height .9s ease,opacity .7s ease,margin-top .6s ease;margin-top:0}
-.cols.open{max-height:1400px;opacity:1;margin-top:3rem}
-@media(max-width:820px){.cols{grid-template-columns:1fr;gap:2.4rem}}
-.cols p{font-size:1.16rem;line-height:1.7;color:var(--cream);max-width:40ch}
-.cols p strong{color:var(--accent);font-weight:500}
+.moreBtn .d{width:6px;height:6px;border-radius:50%;background:currentColor;transition:transform .3s}
+.moreBtn.on .d{transform:translateY(-1px) scale(1.4)}
+/* cortina + texto cinético */
+.curtain{position:relative;max-height:0;overflow:hidden;transition:max-height 1s cubic-bezier(.16,1,.3,1)}
+.curtain.open{max-height:1600px}
+.curtain__inner{padding:3rem 0 0 2rem;position:relative}
+.curtain__rule{position:absolute;left:0;top:3rem;bottom:.5rem;width:2px;background:var(--accent);transform:scaleY(0);transform-origin:top;transition:transform 1.1s cubic-bezier(.16,1,.3,1) .15s}
+.curtain.open .curtain__rule{transform:scaleY(1)}
+.curtain__body{display:grid;grid-template-columns:1fr 1fr;gap:5vw}
+@media(max-width:820px){.curtain__body{grid-template-columns:1fr;gap:2.4rem}}
+.curtain__body p{font-size:1.16rem;line-height:1.7;color:var(--cream);max-width:42ch;margin:0}
+.curtain__body strong{color:var(--accent);font-weight:500}
+.curtain .w{opacity:.1;transition:opacity .5s ease}
+.curtain .w.on{opacity:1}
 
-/* es-head */
+/* CABECERAS DE SECCIÓN */
 .es-head{padding:13vh 0 1vh}
 .es-head h2{font-size:clamp(2rem,5vw,3.6rem)}.es-head h2 em{color:var(--accent)}
 
-/* FIGURA 1 + TABLA 1 (pinned) */
+/* OPENER DE LA ESENCIA (antes huérfano) */
+.es-opener{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+.es-opener__bg{position:absolute;inset:0;background:url("assets/img/es1.jpg") center/cover no-repeat;
+  filter:brightness(.32) blur(7px) grayscale(.15) contrast(1.05);transform:scale(1.08)}
+.es-opener__spot{position:absolute;inset:0;background:radial-gradient(60% 65% at 30% 45%,rgba(224,118,59,.10),rgba(12,11,10,.55) 55%,rgba(12,11,10,.97) 100%)}
+.es-opener__in{position:relative;z-index:2}
+.es-opener .ey{display:block;margin-bottom:1.4rem}
+.es-opener h2{font-size:clamp(2.6rem,8vw,6.5rem);line-height:.98;max-width:14ch}
+.es-opener h2 em{color:var(--accent);font-weight:400}
+.es-opener__sub{margin-top:1.6rem;max-width:34ch;font-family:var(--fd);font-style:italic;font-weight:300;font-size:clamp(1.2rem,2.4vw,1.7rem);color:var(--cream)}
+.es-opener__cue{display:inline-flex;align-items:center;gap:.6rem;margin-top:3rem;color:var(--accent);font-family:var(--fs);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase}
+.es-opener__cue .arrow{animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* FIGURA 1 + TABLA 1 (pinned, grande → cuadritos) */
 .pin{height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4vw;overflow:hidden}
 @media(max-width:900px){.pin{grid-template-columns:1fr;align-content:center}}
 .fig{width:100%;max-width:520px;margin:0 auto}
 .fig .branch{stroke:var(--line);stroke-width:1.5;fill:none}
 .fig .bdraw{stroke:var(--accent);stroke-width:2.2;fill:none;stroke-linecap:round}
-.fig .nlab{font-family:var(--fs);font-size:12px;letter-spacing:.04em;fill:var(--dim);transition:fill .4s}
-.fig .node.on .nlab{fill:var(--cream)}
-.fig .node circle{transition:r .4s,fill .4s,stroke .4s}
-.dimpanel{position:relative;min-height:50vh}
-.dimstep{position:absolute;inset:0;opacity:0;transform:translateY(22px);pointer-events:none}
-.dimstep.on{opacity:1;transform:none;pointer-events:auto;transition:opacity .5s,transform .5s}
-.dimstep .mono{display:block;margin-bottom:.4rem}
-.dimstep h3{font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:1.1rem}
+.fig .nlab{font-family:var(--fs);font-size:12px;letter-spacing:.04em;fill:var(--dim)}
+.dimpanel{position:relative;min-height:66vh}
+.dimscene{position:absolute;inset:0;display:flex;align-items:center}
+.dim-feature{position:absolute;left:0;right:0;will-change:transform,opacity}
+.dim-feature .mono{display:block;margin-bottom:.8rem;color:var(--accent)}
+.dim-feature__name{font-family:var(--fd);font-weight:300;font-size:clamp(2.8rem,6.5vw,5rem);line-height:1;letter-spacing:-.02em}
+.dim-feature__desc{margin-top:1.1rem;max-width:26ch;font-size:1.2rem;color:var(--cream);line-height:1.45}
+.dim-grid{position:absolute;left:0;right:0;will-change:transform,opacity}
+.dim-grid__h{display:block;margin-bottom:.4rem;color:var(--accent)}
+.dim-grid h3{font-family:var(--fd);font-weight:300;font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:1.1rem}
 .elems{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
 @media(max-width:560px){.elems{grid-template-columns:1fr}}
-.elem{border:1px solid var(--line);border-radius:4px;padding:.7rem .8rem;background:rgba(255,255,255,.015)}
-.elem b{display:block;font-family:var(--fs);font-weight:500;font-size:.95rem;color:var(--cream)}
-.elem span{font-size:.82rem;color:var(--dim);line-height:1.4}
+.elem{border:1px solid var(--line);border-radius:4px;padding:.65rem .8rem;background:rgba(255,255,255,.015)}
+.elem b{display:block;font-family:var(--fs);font-weight:500;font-size:.92rem;color:var(--cream)}
+.elem span{font-size:.8rem;color:var(--dim);line-height:1.38}
+.elem--lead{border-color:var(--accent);background:rgba(224,118,59,.07)}
 
 /* REFLEXIÓN */
 .reflex{padding:16vh 0}
@@ -107,15 +132,27 @@ section{position:relative}
 .step h3{font-size:clamp(2rem,4vw,3rem);margin:.2rem 0 .6rem;text-shadow:0 2px 20px rgba(0,0,0,.6)}
 .step p{max-width:34ch;color:var(--cream);font-size:1.15rem;text-shadow:0 2px 16px rgba(0,0,0,.7)}
 
-/* BLEED + CLOSE */
+/* BLEED */
 .bleed{position:relative;height:110vh;display:flex;align-items:center;overflow:hidden}
 .bleed__img{position:absolute;inset:-15% 0;background:url("assets/img/mentor.jpg") center/cover no-repeat;filter:grayscale(.4) brightness(.55) contrast(1.05);will-change:transform}
 .bleed__img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,11,10,.9),rgba(12,11,10,.25))}
 .bleed blockquote{position:relative;z-index:2;margin:0;font-family:var(--fd);font-style:italic;font-weight:300;font-size:clamp(1.8rem,4.2vw,3.4rem);line-height:1.25;max-width:20ch}
 .bleed cite{display:block;font-family:var(--fs);font-style:normal;font-size:.85rem;color:var(--dim);margin-top:1.2rem;letter-spacing:.04em}
-.close{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:12vh 0}
-.close h2{font-size:clamp(2.2rem,6vw,5rem);max-width:16ch}.close h2 em{color:var(--accent)}
-.refs{border-top:1px solid var(--line);margin-top:7vh;padding-top:2rem}
+
+/* FINALE (más punch visual) */
+.finale{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;text-align:center}
+.finale__bg{position:absolute;inset:-8% 0;background:url("assets/img/atmos.jpg") center/cover no-repeat;
+  filter:brightness(.3) grayscale(.2) contrast(1.1);will-change:transform}
+.finale__spot{position:absolute;inset:0;background:radial-gradient(55% 60% at 50% 48%,rgba(224,118,59,.14),rgba(12,11,10,.6) 55%,rgba(12,11,10,.98) 100%)}
+.finale__in{position:relative;z-index:2;width:100%}
+.finale .mono{color:var(--accent);display:block;margin-bottom:1.6rem}
+.finale__line{font-family:var(--fd);font-style:italic;font-weight:300;font-size:clamp(1.1rem,2.4vw,1.7rem);color:var(--dim);margin:0 0 1.2rem}
+.finale__big{font-family:var(--fd);font-weight:300;font-size:clamp(2.4rem,8.5vw,7rem);line-height:1.02;letter-spacing:-.02em;margin:0 auto;max-width:18ch;will-change:transform,opacity}
+.finale__big em{color:var(--accent);font-weight:400;font-style:normal;transition:text-shadow 1s ease}
+.finale.lit .finale__big em{text-shadow:0 0 30px rgba(224,118,59,.6),0 0 60px rgba(224,118,59,.25)}
+
+/* REFERENCIAS */
+.refs{padding:14vh 0 10vh}
 .refs h4{font-family:var(--fs);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin:0 0 1rem}
 .refs p{font-size:.92rem;color:var(--dim);line-height:1.5;max-width:80ch;margin:0 0 .7rem;text-indent:-1.3rem;padding-left:1.3rem}
 .refs p em{font-style:italic;color:var(--cream)}
@@ -123,10 +160,14 @@ section{position:relative}
 .reveal{opacity:0;transform:translateY(40px)}
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none}.reflex .w{opacity:1}
-  .cols{max-height:none;opacity:1;margin-top:3rem}
-  .pin,.pin2,#pin2{height:auto;padding:10vh 0}.dimpanel,.steps{min-height:auto}
-  .dimstep,.step{position:static;opacity:1;transform:none;margin-bottom:2.4rem}
+  .curtain{max-height:none}.curtain .w{opacity:1}
+  .es-opener,.finale{min-height:auto;padding:12vh 0}
+  .pin,#pin2{height:auto;padding:10vh 0}.dimpanel,.steps{min-height:auto}
+  .dimscene{position:static;display:block;margin-bottom:3rem}
+  .dim-feature{position:static}.dim-grid{position:static;margin-top:1.6rem}
+  .step{position:static;opacity:1;transform:none;margin-bottom:2.4rem}
   .es-img:first-child{opacity:1}
+  .finale.lit .finale__big em{text-shadow:none}
 }
 </style>
 </head>
@@ -152,10 +193,15 @@ section{position:relative}
 <!-- QUÉ ES UN TUTOR -->
 <section class="intro"><div class="wrap">
   <p class="lead reveal">Un tutor ofrece acompañamiento y orientación, y por eso necesita ciertas características, cualidades y valores.</p>
-  <button class="moreBtn reveal" id="moreBtn" type="button"><span class="d"></span> Leer más</button>
-  <div class="cols" id="cols">
-    <p>Ser tutor implica establecer una relación cercana y de confianza con los alumnos para orientar su proceso educativo, atender sus necesidades, favorecer su integración al grupo y promover su desarrollo integral. Se caracteriza por actuar con <strong>empatía, autenticidad, respeto y compromiso</strong>, además de poseer habilidades de escucha, comunicación, acompañamiento y trabajo colaborativo.</p>
-    <p>Asimismo, el tutor es un <strong>mediador</strong> que conoce a sus estudiantes, identifica sus fortalezas y dificultades, motiva el aprendizaje y fomenta la toma de decisiones responsables. Su labor incluye mantener comunicación con las familias, colaborar con otros docentes y generar ambientes que favorezcan el crecimiento personal y académico. Ser tutor significa <strong>acompañar, orientar y apoyar</strong> para favorecer la formación integral y el proyecto de vida.</p>
+  <button class="moreBtn reveal" id="moreBtn" type="button" aria-expanded="false"><span class="d"></span> Leer más</button>
+  <div class="curtain" id="curtain">
+    <div class="curtain__inner">
+      <span class="curtain__rule"></span>
+      <div class="curtain__body">
+        <p>Ser tutor implica establecer una relación cercana y de confianza con los alumnos para orientar su proceso educativo, atender sus necesidades, favorecer su integración al grupo y promover su desarrollo integral. Se caracteriza por actuar con <strong>empatía, autenticidad, respeto y compromiso</strong>, además de poseer habilidades de escucha, comunicación, acompañamiento y trabajo colaborativo.</p>
+        <p>Asimismo, el tutor es un <strong>mediador</strong> que conoce a sus estudiantes, identifica sus fortalezas y dificultades, motiva el aprendizaje y fomenta la toma de decisiones responsables. Su labor incluye mantener comunicación con las familias, colaborar con otros docentes y generar ambientes de crecimiento. Ser tutor significa <strong>acompañar, orientar y apoyar</strong> para favorecer la formación integral y el proyecto de vida.</p>
+      </div>
+    </div>
   </div>
 </div></section>
 
@@ -163,7 +209,7 @@ section{position:relative}
 <section class="es-head"><div class="wrap">
   <p class="mono reveal">Figura 1 · Tabla 1</p>
   <h2 class="reveal" style="font-size:clamp(2rem,5vw,3.6rem)">Perfil integral del tutor</h2>
-  <p class="reveal" style="color:var(--dim);max-width:52ch;margin-top:.6rem">Tres dimensiones sostienen la labor tutorial: las actitudes que la hacen humana, los roles que la ponen en práctica y las competencias profesionales que la respaldan.</p>
+  <p class="reveal" style="color:var(--dim);max-width:52ch;margin-top:.6rem">Tres dimensiones sostienen la labor tutorial. Al bajar, cada una se presenta primero en grande y luego se despliega en sus elementos.</p>
 </div></section>
 <section id="pinDim">
   <div class="pin wrap" id="pin1">
@@ -189,11 +235,17 @@ section{position:relative}
   <p id="reflex">El perfil del tutor va más allá del dominio de conocimientos: pide actitudes humanas, roles de acompañamiento y competencias profesionales que, juntas, sostienen una atención integral.</p>
 </div></section>
 
-<!-- LA ESENCIA -->
-<section class="es-head"><div class="wrap">
-  <p class="mono reveal">La esencia del tutor</p>
-  <h2 class="reveal">Más allá de la técnica, una <em>forma de estar</em>.</h2>
-</div></section>
+<!-- OPENER DE LA ESENCIA -->
+<section class="es-opener">
+  <div class="es-opener__bg" id="esOpenBg"></div>
+  <div class="es-opener__spot"></div>
+  <div class="es-opener__in wrap">
+    <span class="mono ey reveal">La esencia del tutor</span>
+    <h2 class="reveal">Más allá de la técnica,<br>una <em>forma de estar</em>.</h2>
+    <p class="es-opener__sub reveal">Seis maneras en las que el tutor, antes que enseñar, está presente.</p>
+    <span class="es-opener__cue reveal">Las seis maneras <span class="arrow">↓</span></span>
+  </div>
+</section>
 <section id="pinEs">
   <div id="pin2">
     <div class="es-bg" aria-hidden="true">
@@ -227,19 +279,28 @@ section{position:relative}
   </div>
 </section>
 
-<!-- CLOSE + REFERENCIAS -->
-<section class="close"><div class="wrap">
-  <p class="mono reveal" style="margin-bottom:1.2rem">En el fondo</p>
-  <h2 class="reveal">La esencia del tutor cabe en una idea: <em>acompañar a alguien a crecer, y confiar en que puede.</em></h2>
-  <div class="refs reveal">
-    <h4>Referencias</h4>
+<!-- FINALE -->
+<section class="finale">
+  <div class="finale__bg" id="finaleBg"></div>
+  <div class="finale__spot"></div>
+  <div class="finale__in wrap">
+    <span class="mono">En el fondo</span>
+    <p class="finale__line">La esencia del tutor cabe en una idea:</p>
+    <h2 class="finale__big">Acompañar a alguien a <em>crecer</em>, y <em>confiar</em> en que puede.</h2>
+  </div>
+</section>
+
+<!-- REFERENCIAS -->
+<section class="refs"><div class="wrap">
+  <h4 class="reveal">Referencias</h4>
+  <div class="reveal">
     <p>Alonso Aguerrebere, J. M. (2017). <em>Nuevo manual de orientación educativa y tutoría: Educación media superior</em>. Editorial Parmenia; Universidad La Salle México.</p>
     <p>González-Benito, A., &amp; Vélaz de Medrano Ureta, C. (2015). <em>La acción tutorial en el sistema escolar</em>. UNED – Universidad Nacional de Educación a Distancia.</p>
     <p>Wisker, G., Exley, K., &amp; Antoniou, M. (2016). <em>Trabajando individualmente con cada estudiante: Tutoría personalizada, coaching, mentoría y supervisión en educación superior</em>. Narcea Ediciones.</p>
-    <div class="foot">
-      <span>Complemento del trabajo «Perfil del tutor» · Temas Selectos de Educación (UPAEP)</span>
-      <span>Fotografías: Unsplash</span>
-    </div>
+  </div>
+  <div class="foot reveal">
+    <span>Complemento del trabajo «Perfil del tutor» · Temas Selectos de Educación (UPAEP)</span>
+    <span>Fotografías: Unsplash</span>
   </div>
 </div></section>
 
@@ -250,61 +311,85 @@ section{position:relative}
 (function(){
 const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* botón "Leer más" (funciona siempre) */
-var mb=document.getElementById('moreBtn'), cols=document.getElementById('cols');
+/* helper: envolver palabras en .w preservando <strong> */
+function wrapWords(root){
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);
+  const texts=[];let n;while(n=walker.nextNode())texts.push(n);
+  texts.forEach(tn=>{
+    if(!tn.textContent.trim()){return;}
+    const frag=document.createDocumentFragment();
+    tn.textContent.split(/(\s+)/).forEach(tok=>{
+      if(tok===''){return;}
+      if(/^\s+$/.test(tok)){frag.appendChild(document.createTextNode(tok));}
+      else{const s=document.createElement('span');s.className='w';s.textContent=tok;frag.appendChild(s);}
+    });
+    tn.parentNode.replaceChild(frag,tn);
+  });
+}
+
+/* intro: cortina + texto cinético */
+const curtain=document.getElementById('curtain');
+wrapWords(curtain.querySelector('.curtain__body'));
+const cWords=[...curtain.querySelectorAll('.w')];
+const mb=document.getElementById('moreBtn');
+let curtainOpen=false;
 if(mb){mb.addEventListener('click',function(){
-  var open=cols.classList.toggle('open');
-  mb.innerHTML='<span class="d"></span> '+(open?'Mostrar menos':'Leer más');
-  if(window.__lenis){setTimeout(function(){window.__lenis.resize&&window.__lenis.resize();},950);}
+  curtainOpen=!curtainOpen;
+  curtain.classList.toggle('open',curtainOpen);
+  mb.classList.toggle('on',curtainOpen);
+  mb.setAttribute('aria-expanded',curtainOpen);
+  mb.innerHTML='<span class="d"></span> '+(curtainOpen?'Mostrar menos':'Leer más');
+  if(curtainOpen){
+    if(window.gsap&&!REDUCE){gsap.fromTo(cWords,{opacity:.1},{opacity:1,duration:.45,stagger:.012,ease:'none',delay:.18});}
+    else{cWords.forEach(w=>w.classList.add('on'));}
+  }else if(!(window.gsap&&!REDUCE)){cWords.forEach(w=>w.classList.remove('on'));}
+  if(window.__lenis){setTimeout(function(){window.__lenis.resize&&window.__lenis.resize();},1000);}
 });}
 
-/* DIMENSIONES (Figura 1 / Tabla 1) */
+/* DIMENSIONES (Figura 1 / Tabla 1): grande -> cuadritos */
 const DIMS=[
- {t:"Actitudes fundamentales", el:[
+ {lab:"Actitudes",t:"Actitudes fundamentales", el:[
    ["Empatía","Comprende necesidades, intereses y dificultades."],
-   ["Escucha activa","Atiende lo que el estudiante expresa, verbal y emocionalmente."],
-   ["Respeto","Valora la diversidad de opiniones y ritmos de aprendizaje."],
+   ["Escucha activa","Atiende lo verbal y lo emocional."],
+   ["Respeto","Valora la diversidad de opiniones y ritmos."],
    ["Paciencia","Entiende que cada persona aprende distinto."],
    ["Disponibilidad","Mantiene una actitud permanente de apoyo."],
-   ["Compromiso","Se interesa de verdad por el progreso del estudiante."],
-   ["Confidencialidad","Maneja con discreción y ética la información personal."]]},
- {t:"Roles del tutor", el:[
+   ["Compromiso","Se interesa de verdad por el progreso."],
+   ["Confidencialidad","Maneja con discreción y ética lo personal."]]},
+ {lab:"Roles",t:"Roles del tutor", el:[
    ["Orientador","Ayuda a tomar decisiones académicas, personales y profesionales."],
    ["Acompañante","Apoya durante el aprendizaje y la adaptación."],
-   ["Facilitador","Promueve autonomía y habilidades de estudio."],
-   ["Mediador","Favorece la comunicación entre estudiantes, docentes y familias."],
-   ["Motivador","Estimula la confianza, el esfuerzo y la perseverancia."],
-   ["Observador y evaluador","Identifica fortalezas y necesidades para mejorar."]]},
- {t:"Competencias profesionales", el:[
+   ["Facilitador","Promueve autonomía y hábitos de estudio."],
+   ["Mediador","Comunica a estudiantes, docentes y familias."],
+   ["Motivador","Estimula confianza, esfuerzo y perseverancia."],
+   ["Observador y evaluador","Identifica fortalezas y necesidades."]]},
+ {lab:"Competencias",t:"Competencias profesionales", el:[
    ["Conocimientos especializados","Domina el área o disciplina que orienta."],
-   ["Comunicación","Establece interacciones efectivas y relaciones de confianza."],
-   ["Liderazgo y acompañamiento","Guía y apoya el desarrollo integral."],
+   ["Comunicación","Establece relaciones de confianza efectivas."],
+   ["Liderazgo y acompañamiento","Guía el desarrollo integral."],
    ["Inteligencia emocional","Gestiona emociones propias y ajenas."],
-   ["Sentido ético y responsabilidad","Actúa con integridad y profesionalismo."],
-   ["Trabajo en equipo","Colabora con docentes, familias y otros actores."],
-   ["Formación continua","Se actualiza y se desarrolla de forma permanente."]]},
+   ["Sentido ético","Actúa con integridad y profesionalismo."],
+   ["Trabajo en equipo","Colabora con docentes y familias."],
+   ["Formación continua","Se actualiza de forma permanente."]]},
 ];
 const figPos=[[260,70],[110,380],[410,380]], figLab=["Actitudes","Roles","Competencias"];
 const fn=document.getElementById('fignodes');
 figPos.forEach((p,i)=>{const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','node');g.dataset.b=i;
   g.innerHTML='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="7" fill="#0c0b0a" stroke="#9c9486" stroke-width="1.6"/><text class="nlab" x="'+p[0]+'" y="'+(p[1]<230?p[1]-16:p[1]+24)+'" text-anchor="middle">'+figLab[i]+'</text>';fn.appendChild(g);});
+const nodeCircles=[...document.querySelectorAll('#fignodes .node circle')];
+const nodeLabels=[...document.querySelectorAll('#fignodes .node .nlab')];
 const dimpanel=document.getElementById('dimpanel');
-DIMS.forEach((d,i)=>{const s=document.createElement('div');s.className='dimstep'+(i===0?' on':'');
-  s.innerHTML='<span class="mono">Dimensión 0'+(i+1)+'</span><h3>'+d.t+'</h3><div class="elems">'+
-    d.el.map(e=>'<div class="elem"><b>'+e[0]+'</b><span>'+e[1]+'</span></div>').join('')+'</div>';dimpanel.appendChild(s);});
+DIMS.forEach((d,i)=>{const sc=document.createElement('div');sc.className='dimscene';
+  const cards=d.el.map((e,k)=>'<div class="elem'+(k===0?' elem--lead':'')+'"><b>'+e[0]+'</b><span>'+e[1]+'</span></div>').join('');
+  sc.innerHTML=
+    '<div class="dim-feature"><span class="mono">Dimensión 0'+(i+1)+' · '+d.lab+'</span>'+
+      '<div class="dim-feature__name">'+d.el[0][0]+'</div>'+
+      '<p class="dim-feature__desc">'+d.el[0][1]+'</p></div>'+
+    '<div class="dim-grid"><span class="dim-grid__h mono">Dimensión 0'+(i+1)+'</span><h3>'+d.t+'</h3><div class="elems">'+cards+'</div></div>';
+  dimpanel.appendChild(sc);});
+const scenes=[...document.querySelectorAll('.dimscene')];
 const bdraws=[...document.querySelectorAll('#fig .bdraw')];
 bdraws.forEach(p=>{const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;});
-function setDim(idx){
-  document.querySelectorAll('#dimpanel .dimstep').forEach((s,i)=>s.classList.toggle('on',i===idx));
-  document.querySelectorAll('#fignodes .node').forEach((n,i)=>{n.classList.toggle('on',i===idx);const c=n.querySelector('circle');
-    c.setAttribute('r',i===idx?11:7);c.setAttribute('fill',i===idx?'#E0763B':'#0c0b0a');c.setAttribute('stroke',i===idx?'#E0763B':'#9c9486');});
-  if(window.gsap && !REDUCE){
-    const active=document.querySelectorAll('#dimpanel .dimstep')[idx];
-    if(active) gsap.fromTo(active.querySelectorAll('.elem'),{opacity:0,y:16},{opacity:1,y:0,stagger:.05,duration:.5,ease:'power2.out',overwrite:true});
-    bdraws.forEach((p,i)=>{const L=p.getTotalLength();gsap.to(p,{strokeDashoffset:i===idx?0:L,duration:.6,ease:'power2.out',overwrite:true});});
-  }
-}
-document.querySelectorAll('#fignodes .node').forEach(n=>n.addEventListener('mouseenter',()=>setDim(+n.dataset.b)));
 
 /* ESENCIAS + fondo que cambia */
 const ES=[
@@ -343,26 +428,56 @@ if(!REDUCE){
   gsap.to('.hero h1 .ln span',{yPercent:0,duration:1.1,stagger:.12,ease:'power3.out',delay:.2});
   gsap.from('.hero__sub',{opacity:0,y:24,duration:1,delay:.9,ease:'power2.out'});
   gsap.to('#heroBg',{yPercent:18,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('#esOpenBg',{yPercent:12,ease:'none',scrollTrigger:{trigger:'.es-opener',start:'top bottom',end:'bottom top',scrub:true}});
   gsap.to('#bleedImg',{yPercent:14,ease:'none',scrollTrigger:{trigger:'.bleed',start:'top bottom',end:'bottom top',scrub:true}});
 
   const rf=document.getElementById('reflex');rf.innerHTML=rf.textContent.split(' ').map(w=>'<span class="w">'+w+'</span>').join(' ');
   gsap.to('.reflex .w',{className:'w on',stagger:.05,ease:'none',scrollTrigger:{trigger:'.reflex',start:'top 72%',end:'bottom 60%',scrub:true}});
 
-  var lastDim=-1, lastEs=-1;
-  ScrollTrigger.create({trigger:'#pinDim',start:'top top',end:'+=220%',pin:'#pin1',scrub:.5,
-    onUpdate:s=>{var i=Math.min(2,Math.floor(s.progress*3));if(i!==lastDim){lastDim=i;setDim(i);}}});
+  /* DIMENSIONES: timeline scrubbeado (sin bump) — grande -> cuadritos */
+  gsap.set(scenes,{autoAlpha:0});
+  gsap.set('.dim-grid',{autoAlpha:0,scale:.96});
+  const tl=gsap.timeline({scrollTrigger:{trigger:'#pinDim',start:'top top',end:'+=360%',pin:'#pin1',scrub:.6}});
+  scenes.forEach((sc,i)=>{
+    const feat=sc.querySelector('.dim-feature'), grid=sc.querySelector('.dim-grid'), cards=sc.querySelectorAll('.elem');
+    const lbl='d'+i; tl.addLabel(lbl);
+    tl.to(sc,{autoAlpha:1,duration:.1},lbl);
+    tl.fromTo(feat,{y:55,autoAlpha:0},{y:0,autoAlpha:1,duration:.2},lbl);
+    tl.to(bdraws[i],{strokeDashoffset:0,duration:.22},lbl);
+    tl.to(nodeCircles[i],{attr:{r:11,fill:'#E0763B',stroke:'#E0763B'},duration:.2},lbl);
+    tl.to(nodeLabels[i],{attr:{fill:'#F3EBDD'},duration:.2},lbl);
+    tl.to({},{duration:.22});
+    tl.to(feat,{y:-46,scale:.82,autoAlpha:0,duration:.26});
+    tl.to(grid,{autoAlpha:1,scale:1,duration:.26},'<');
+    tl.fromTo(cards,{y:28,autoAlpha:0},{y:0,autoAlpha:1,stagger:.035,duration:.26},'<+.05');
+    tl.to({},{duration:.26});
+    if(i<scenes.length-1){tl.to([sc],{autoAlpha:0,duration:.16});}
+  });
+
+  /* ESENCIAS pin */
+  let lastEs=-1;
   ScrollTrigger.create({trigger:'#pinEs',start:'top top',end:'+=340%',pin:'#pin2',scrub:.5,
     onUpdate:s=>{linkPath.setAttribute('stroke-dashoffset',total*(1-s.progress));var i=Math.min(NN-1,Math.floor(s.progress*NN));if(i!==lastEs){lastEs=i;setEs(i);}}});
-  setDim(0);
 
-  gsap.utils.toArray('.reveal').forEach(el=>gsap.to(el,{opacity:1,y:0,duration:1,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 84%'}}));
+  /* FINALE: punch visual */
+  gsap.to('#finaleBg',{yPercent:10,ease:'none',scrollTrigger:{trigger:'.finale',start:'top bottom',end:'bottom top',scrub:true}});
+  gsap.fromTo('.finale__big',{autoAlpha:.12,filter:'blur(9px)',y:34,scale:.97},
+    {autoAlpha:1,filter:'blur(0px)',y:0,scale:1,ease:'none',scrollTrigger:{trigger:'.finale',start:'top 78%',end:'top 32%',scrub:true}});
+  gsap.from('.finale .mono, .finale__line',{autoAlpha:0,y:22,stagger:.12,duration:.9,ease:'power2.out',scrollTrigger:{trigger:'.finale',start:'top 72%'}});
+  ScrollTrigger.create({trigger:'.finale',start:'top 45%',onEnter:()=>document.querySelector('.finale').classList.add('lit'),onLeaveBack:()=>document.querySelector('.finale').classList.remove('lit')});
+
+  gsap.utils.toArray('.reveal').forEach(el=>gsap.to(el,{opacity:1,y:0,duration:1,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 86%'}}));
 }else{
   document.querySelectorAll('.reveal').forEach(e=>{e.style.opacity=1;e.style.transform='none';});
-  document.querySelectorAll('.dimstep,.step').forEach(s=>s.classList.add('on'));
-  cols.classList.add('open');
+  scenes.forEach(sc=>sc.style.opacity=1);
+  document.querySelectorAll('.dim-feature').forEach(f=>f.style.opacity=1);
+  document.querySelectorAll('.dim-grid').forEach(g=>{g.style.opacity=1;g.style.transform='none';});
+  document.querySelectorAll('.step').forEach(s=>s.classList.add('on'));
+  curtain.classList.add('open');cWords.forEach(w=>w.classList.add('on'));
   bdraws.forEach(p=>p.style.strokeDashoffset=0);
   linkPath.setAttribute('stroke-dashoffset',0);
   esimgs.forEach((im,i)=>im.classList.toggle('on',i===0));
+  document.querySelector('.finale').classList.add('lit');
 }
 })();
 </script>
