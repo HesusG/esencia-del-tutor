@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perfil del tutor · ¿Qué es lo esencial de ser tutor?</title>
+<meta name="description" content="Perfil del tutor: qué es un tutor, su perfil integral (actitudes, roles y competencias) y la esencia de su labor. Pieza visual basada en el trabajo del curso.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0b0a; --bg2:#141210; --cream:#F3EBDD; --dim:#9c9486; --line:#2a2622;
+  --accent:#E0763B; --accent2:#C4351C;
+  --fd:"Fraunces",Georgia,serif; --fs:"Space Grotesk",system-ui,sans-serif; --maxw:1180px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--cream)}
+body{font-family:var(--fs);font-size:1.05rem;line-height:1.6;overflow-x:hidden;cursor:none}
+img{display:block;max-width:100%}
+a{color:var(--accent)}
+::selection{background:var(--accent);color:#0c0b0a}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 6vw}
+h1,h2,h3{font-family:var(--fd);font-weight:300;line-height:1.04;letter-spacing:-.02em;margin:0}
+.display{font-size:clamp(3rem,11vw,9.5rem);font-weight:300}
+.mono{font-family:var(--fs);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.serif-it{font-family:var(--fd);font-style:italic}
+
+.grain{position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.06;mix-blend-mode:overlay;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.vig{position:fixed;inset:0;z-index:8999;pointer-events:none;background:radial-gradient(120% 120% at 50% 40%,transparent 55%,rgba(0,0,0,.55))}
+.cursor{position:fixed;top:0;left:0;width:10px;height:10px;border-radius:50%;background:var(--accent);z-index:10000;pointer-events:none;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s;mix-blend-mode:difference}
+.cursor.big{width:54px;height:54px;background:var(--cream)}
+@media(hover:none){.cursor{display:none}body{cursor:auto}}
+.prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:9500}
+.bar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.3rem 6vw;mix-blend-mode:difference;color:#fff}
+.bar .mono{color:#fff}.bar a{color:#fff;border-bottom:1px solid transparent}.bar a:hover{border-color:#fff}
+
+/* HERO */
+.hero{position:relative;height:100svh;display:flex;align-items:center;overflow:hidden}
+.hero__bg{position:absolute;inset:-10% 0;background:url("assets/img/atmos.jpg") center/cover no-repeat;filter:grayscale(.3) brightness(.5) contrast(1.05);will-change:transform}
+.hero__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,11,10,.5),rgba(12,11,10,.2) 40%,rgba(12,11,10,.95))}
+.hero__in{position:relative;z-index:2}
+.hero h1 .ln{display:block;overflow:hidden}.hero h1 .ln span{display:block}
+.hero h1 em{color:var(--accent);font-weight:400}
+.hero__sub{max-width:30ch;margin-top:1.4rem;font-size:1.5rem;font-family:var(--fd);font-style:italic;font-weight:300;color:var(--cream)}
+.scrollcue{position:absolute;bottom:2rem;left:6vw;z-index:2;display:flex;gap:.7rem;align-items:center}
+.scrollcue .l{width:42px;height:1px;background:var(--accent);transform-origin:left;animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleX(.3)}50%{transform:scaleX(1)}}
+
+section{position:relative}
+/* QUÉ ES UN TUTOR */
+.intro{padding:16vh 0}
+.intro .lead{font-family:var(--fd);font-weight:300;font-size:clamp(1.6rem,3.6vw,2.7rem);line-height:1.22;max-width:20ch;margin:0 0 8vh}
+.intro .cols{display:grid;grid-template-columns:1fr 1fr;gap:5vw}
+@media(max-width:820px){.intro .cols{grid-template-columns:1fr;gap:2.4rem}}
+.intro p{font-size:1.18rem;line-height:1.7;color:var(--cream);max-width:40ch}
+.intro p strong{color:var(--accent);font-weight:500}
+
+/* PINNED diagram (Figura 1 + Tabla 1) */
+.pin{height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4vw;overflow:hidden}
+@media(max-width:900px){.pin{grid-template-columns:1fr;align-content:center}}
+.fig{width:100%;max-width:520px;margin:0 auto}
+.fig .branch{stroke:var(--line);stroke-width:1.5;fill:none;transition:stroke .4s}
+.fig .branch.on{stroke:var(--accent)}
+.fig .nlab{font-family:var(--fs);font-size:12px;letter-spacing:.04em;fill:var(--dim);transition:fill .4s}
+.fig .node.on .nlab{fill:var(--cream)}
+.fig .node circle{transition:r .4s,fill .4s,stroke .4s}
+.dimpanel{position:relative;min-height:50vh}
+.dimstep{position:absolute;inset:0;opacity:0;transform:translateY(22px);pointer-events:none}
+.dimstep.on{opacity:1;transform:none;pointer-events:auto;transition:opacity .5s,transform .5s}
+.dimstep .mono{display:block;margin-bottom:.4rem}
+.dimstep h3{font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:1.1rem}
+.elems{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+@media(max-width:560px){.elems{grid-template-columns:1fr}}
+.elem{border:1px solid var(--line);border-radius:4px;padding:.7rem .8rem;background:rgba(255,255,255,.015)}
+.elem b{display:block;font-family:var(--fs);font-weight:500;font-size:.95rem;color:var(--cream)}
+.elem span{font-size:.82rem;color:var(--dim);line-height:1.4}
+
+/* REFLEXIÓN */
+.reflex{padding:16vh 0}
+.reflex p{font-family:var(--fd);font-weight:300;font-size:clamp(1.5rem,3.2vw,2.4rem);line-height:1.3;max-width:24ch}
+.reflex .w{opacity:.16}.reflex .w.on{opacity:1;transition:opacity .3s}
+
+/* ESENCIA constellation */
+.es-head{padding:12vh 0 0}
+.es-head h2{font-size:clamp(2.2rem,6vw,4.5rem)}
+.es-head h2 em{color:var(--accent)}
+.pin2{height:100svh;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:4vw;overflow:hidden}
+@media(max-width:900px){.pin2{grid-template-columns:1fr;align-content:center}}
+.constel{width:100%;max-width:500px;margin:0 auto}
+.link{stroke:var(--accent);stroke-width:1.4;fill:none}
+.node .lbl{font-family:var(--fs);font-size:11px;fill:var(--dim)}
+.steps{position:relative;min-height:42vh}
+.step{position:absolute;inset:0;opacity:0;transform:translateY(24px)}
+.step.on{opacity:1;transform:none;transition:opacity .5s,transform .5s}
+.step .no{font-family:var(--fd);font-size:5rem;font-weight:300;color:var(--accent);line-height:1;opacity:.5}
+.step h3{font-size:clamp(2rem,4vw,3rem);margin:.2rem 0 .6rem}
+.step p{max-width:34ch;color:var(--cream);font-size:1.15rem}
+
+/* BLEED + CLOSE */
+.bleed{position:relative;height:110vh;display:flex;align-items:center;overflow:hidden}
+.bleed__img{position:absolute;inset:-15% 0;background:url("assets/img/mentor.jpg") center/cover no-repeat;filter:grayscale(.4) brightness(.55) contrast(1.05);will-change:transform}
+.bleed__img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,11,10,.9),rgba(12,11,10,.25))}
+.bleed blockquote{position:relative;z-index:2;margin:0;font-family:var(--fd);font-style:italic;font-weight:300;font-size:clamp(1.8rem,4.2vw,3.4rem);line-height:1.25;max-width:20ch}
+.bleed cite{display:block;font-family:var(--fs);font-style:normal;font-size:.85rem;color:var(--dim);margin-top:1.2rem;letter-spacing:.04em}
+.close{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:12vh 0}
+.close h2{font-size:clamp(2.2rem,6vw,5rem);max-width:16ch}.close h2 em{color:var(--accent)}
+.refs{border-top:1px solid var(--line);margin-top:7vh;padding-top:2rem}
+.refs h4{font-family:var(--fs);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin:0 0 1rem}
+.refs p{font-size:.92rem;color:var(--dim);line-height:1.5;max-width:80ch;margin:0 0 .7rem;text-indent:-1.3rem;padding-left:1.3rem}
+.refs p em{font-style:italic;color:var(--cream)}
+.foot{color:var(--dim);font-size:.82rem;margin-top:3rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.reveal{opacity:0;transform:translateY(40px)}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none}.reflex .w{opacity:1}
+  .pin,.pin2{height:auto;padding:10vh 0}.dimpanel,.steps{min-height:auto}
+  .dimstep,.step{position:static;opacity:1;transform:none;margin-bottom:2.4rem}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div><div class="vig"></div>
+<div class="cursor" id="cursor"></div>
+<div class="prog" id="prog"></div>
+<div class="bar">
+  <span class="mono">Perfil del tutor</span>
+  <a class="mono" href="index.html">La esencia</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__bg" id="heroBg"></div>
+  <div class="hero__in wrap">
+    <p class="mono" style="margin-bottom:1.4rem">Temas Selectos de Educación · UPAEP</p>
+    <h1 class="display"><span class="ln"><span>Perfil</span></span><span class="ln"><span>del <em>tutor</em></span></span></h1>
+    <p class="hero__sub">¿Qué es lo esencial de ser tutor?</p>
+  </div>
+  <div class="scrollcue"><span class="l"></span><span class="mono">Desliza</span></div>
+</section>
+
+<!-- QUÉ ES UN TUTOR -->
+<section class="intro"><div class="wrap">
+  <p class="lead reveal">Un tutor ofrece acompañamiento y orientación, y por eso necesita ciertas características, cualidades y valores.</p>
+  <div class="cols">
+    <p class="reveal">Ser tutor implica establecer una relación cercana y de confianza con los alumnos para orientar su proceso educativo, atender sus necesidades, favorecer su integración al grupo y promover su desarrollo integral. Se caracteriza por actuar con <strong>empatía, autenticidad, respeto y compromiso</strong>, además de poseer habilidades de escucha, comunicación, acompañamiento y trabajo colaborativo.</p>
+    <p class="reveal">Asimismo, el tutor es un <strong>mediador</strong> que conoce a sus estudiantes, identifica sus fortalezas y dificultades, motiva el aprendizaje y fomenta la toma de decisiones responsables. Su labor incluye mantener comunicación con las familias, colaborar con otros docentes y generar ambientes que favorezcan el crecimiento personal y académico. Ser tutor significa <strong>acompañar, orientar y apoyar</strong> para favorecer la formación integral y el proyecto de vida.</p>
+  </div>
+</div></section>
+
+<!-- FIGURA 1 + TABLA 1 (pinned) -->
+<section class="es-head"><div class="wrap">
+  <p class="mono reveal">Figura 1 · Tabla 1</p>
+  <h2 class="reveal" style="font-size:clamp(2rem,5vw,3.6rem)">Perfil integral del tutor</h2>
+  <p class="reveal" style="color:var(--dim);max-width:52ch;margin-top:.6rem">Tres dimensiones sostienen la labor tutorial: las actitudes que la hacen humana, los roles que la ponen en práctica y las competencias profesionales que la respaldan.</p>
+</div></section>
+<section id="pinDim">
+  <div class="pin wrap" id="pin1">
+    <div>
+      <svg class="fig" id="fig" viewBox="0 0 520 460" aria-hidden="true">
+        <path class="branch" data-b="0" d="M260 230 L260 70"/>
+        <path class="branch" data-b="1" d="M260 230 L110 380"/>
+        <path class="branch" data-b="2" d="M260 230 L410 380"/>
+        <g id="fignodes"></g>
+        <circle cx="260" cy="230" r="9" fill="#E0763B"/>
+        <text x="260" y="255" text-anchor="middle" class="nlab" style="fill:var(--cream)">Tutor</text>
+      </svg>
+    </div>
+    <div class="dimpanel" id="dimpanel"></div>
+  </div>
+</section>
+
+<!-- REFLEXIÓN -->
+<section class="reflex"><div class="wrap">
+  <p id="reflex">El perfil del tutor va más allá del dominio de conocimientos: pide actitudes humanas, roles de acompañamiento y competencias profesionales que, juntas, sostienen una atención integral.</p>
+</div></section>
+
+<!-- LA ESENCIA -->
+<section class="es-head"><div class="wrap">
+  <p class="mono reveal">La esencia del tutor</p>
+  <h2 class="reveal">Más allá de la técnica, una <em>forma de estar</em>.</h2>
+</div></section>
+<section id="pinEs">
+  <div class="pin2 wrap" id="pin2">
+    <div>
+      <span class="mono" style="display:block;margin-bottom:1rem">Seis maneras de estar</span>
+      <svg class="constel" id="constel" viewBox="0 0 520 520" aria-hidden="true">
+        <path class="link" id="link" d="" stroke-dasharray="1" stroke-dashoffset="1"/>
+        <g id="esnodes"></g>
+      </svg>
+    </div>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<!-- BLEED -->
+<section class="bleed">
+  <div class="bleed__img" id="bleedImg"></div>
+  <div class="wrap">
+    <blockquote class="reveal">El mejor tutor es un diálogo abierto, un corazón que escucha.
+      <cite>Alonso Aguerrebere (2017)</cite></blockquote>
+  </div>
+</section>
+
+<!-- CLOSE + REFERENCIAS -->
+<section class="close"><div class="wrap">
+  <p class="mono reveal" style="margin-bottom:1.2rem">En el fondo</p>
+  <h2 class="reveal">La esencia del tutor cabe en una idea: <em>acompañar a alguien a crecer, y confiar en que puede.</em></h2>
+  <div class="refs reveal">
+    <h4>Referencias</h4>
+    <p>Alonso Aguerrebere, J. M. (2017). <em>Nuevo manual de orientación educativa y tutoría: Educación media superior</em>. Editorial Parmenia; Universidad La Salle México.</p>
+    <p>González-Benito, A., &amp; Vélaz de Medrano Ureta, C. (2015). <em>La acción tutorial en el sistema escolar</em>. UNED – Universidad Nacional de Educación a Distancia.</p>
+    <p>Wisker, G., Exley, K., &amp; Antoniou, M. (2016). <em>Trabajando individualmente con cada estudiante: Tutoría personalizada, coaching, mentoría y supervisión en educación superior</em>. Narcea Ediciones.</p>
+    <div class="foot">
+      <span>Complemento del trabajo «Perfil del tutor» · Temas Selectos de Educación (UPAEP)</span>
+      <span>Fotografías: Vitaly Gariev y Fujiphilm (Unsplash)</span>
+    </div>
+  </div>
+</div></section>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* --- DIMENSIONES (Figura 1 / Tabla 1) --- */
+const DIMS=[
+ {t:"Actitudes fundamentales", el:[
+   ["Empatía","Comprende necesidades, intereses y dificultades."],
+   ["Escucha activa","Atiende lo que el estudiante expresa, verbal y emocionalmente."],
+   ["Respeto","Valora la diversidad de opiniones y ritmos de aprendizaje."],
+   ["Paciencia","Entiende que cada persona aprende distinto."],
+   ["Disponibilidad","Mantiene una actitud permanente de apoyo."],
+   ["Compromiso","Se interesa de verdad por el progreso del estudiante."],
+   ["Confidencialidad","Maneja con discreción y ética la información personal."],
+ ]},
+ {t:"Roles del tutor", el:[
+   ["Orientador","Ayuda a tomar decisiones académicas, personales y profesionales."],
+   ["Acompañante","Apoya durante el aprendizaje y la adaptación."],
+   ["Facilitador","Promueve autonomía y habilidades de estudio."],
+   ["Mediador","Favorece la comunicación entre estudiantes, docentes y familias."],
+   ["Motivador","Estimula la confianza, el esfuerzo y la perseverancia."],
+   ["Observador y evaluador","Identifica fortalezas y necesidades para mejorar."],
+ ]},
+ {t:"Competencias profesionales", el:[
+   ["Conocimientos especializados","Domina el área o disciplina que orienta."],
+   ["Comunicación","Establece interacciones efectivas y relaciones de confianza."],
+   ["Liderazgo y acompañamiento","Guía y apoya el desarrollo integral."],
+   ["Inteligencia emocional","Gestiona emociones propias y ajenas."],
+   ["Sentido ético y responsabilidad","Actúa con integridad y profesionalismo."],
+   ["Trabajo en equipo","Colabora con docentes, familias y otros actores."],
+   ["Formación continua","Se actualiza y se desarrolla de forma permanente."],
+ ]},
+];
+const figPos=[[260,70],[110,380],[410,380]];
+const figLab=["Actitudes","Roles","Competencias"];
+const fn=document.getElementById('fignodes');
+figPos.forEach((p,i)=>{
+  const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','node');g.dataset.b=i;
+  g.innerHTML='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="7" fill="#0c0b0a" stroke="#9c9486" stroke-width="1.6"/><text class="nlab" x="'+p[0]+'" y="'+(p[1]<230?p[1]-16:p[1]+24)+'" text-anchor="middle">'+figLab[i]+'</text>';
+  fn.appendChild(g);
+});
+const dimpanel=document.getElementById('dimpanel');
+DIMS.forEach((d,i)=>{
+  const s=document.createElement('div');s.className='dimstep'+(i===0?' on':'');
+  s.innerHTML='<span class="mono">Dimensión 0'+(i+1)+'</span><h3>'+d.t+'</h3><div class="elems">'+
+    d.el.map(e=>'<div class="elem"><b>'+e[0]+'</b><span>'+e[1]+'</span></div>').join('')+'</div>';
+  dimpanel.appendChild(s);
+});
+function setDim(idx){
+  document.querySelectorAll('#dimpanel .dimstep').forEach((s,i)=>s.classList.toggle('on',i===idx));
+  document.querySelectorAll('#fig .branch').forEach(b=>b.classList.toggle('on',+b.dataset.b===idx));
+  document.querySelectorAll('#fignodes .node').forEach((n,i)=>{
+    n.classList.toggle('on',i===idx);const c=n.querySelector('circle');
+    c.setAttribute('r',i===idx?11:7);c.setAttribute('fill',i===idx?'#E0763B':'#0c0b0a');c.setAttribute('stroke',i===idx?'#E0763B':'#9c9486');
+  });
+}
+document.querySelectorAll('#fignodes .node').forEach(n=>n.addEventListener('mouseenter',()=>setDim(+n.dataset.b)));
+
+/* --- ESENCIAS (constelación) --- */
+const ES=[
+ {t:"Estar de verdad",d:"Antes que cualquier técnica, el tutor es presencia: un punto de apoyo en quien confiar."},
+ {t:"Escuchar con el corazón",d:"Oír de verdad, incluso lo que el alumno todavía no sabe pedir."},
+ {t:"Ver a la persona entera",d:"No solo al alumno: a la persona, en lo cognitivo, lo emocional y lo social."},
+ {t:"Tratar a cada quien como único",d:"Conocer a cada estudiante y acompañar uno a uno, nunca en serie."},
+ {t:"Autenticidad y empatía",d:"Ser uno mismo en la relación y aceptar a la persona tal como es."},
+ {t:"Cercanía que libera",d:"Cerca, pero no para resolver por él, sino para que crezca y decida."},
+];
+const stepsEl=document.getElementById('steps');
+ES.forEach((e,i)=>{const d=document.createElement('div');d.className='step'+(i===0?' on':'');
+  d.innerHTML='<div class="no">0'+(i+1)+'</div><h3>'+e.t+'</h3><p>'+e.d+'</p>';stepsEl.appendChild(d);});
+const cx=260,cy=260,RR=180,NN=6;
+const pts=[...Array(NN)].map((_,i)=>{const a=-Math.PI/2+i*2*Math.PI/NN;return [cx+RR*Math.cos(a),cy+RR*Math.sin(a)];});
+const eg=document.getElementById('esnodes');
+pts.forEach((p,i)=>{const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','node');g.dataset.i=i;
+  g.innerHTML='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="6" fill="#0c0b0a" stroke="#E0763B" stroke-width="1.6"/><text class="lbl" x="'+p[0]+'" y="'+(p[1]<cy?p[1]-16:p[1]+26)+'" text-anchor="middle">0'+(i+1)+'</text>';eg.appendChild(g);});
+const linkPath=document.getElementById('link');
+linkPath.setAttribute('d','M'+pts.map(p=>p[0]+' '+p[1]).join(' L ')+' Z');
+const total=linkPath.getTotalLength();linkPath.setAttribute('stroke-dasharray',total);linkPath.setAttribute('stroke-dashoffset',total);
+function setEs(idx){
+  document.querySelectorAll('#steps .step').forEach((s,i)=>s.classList.toggle('on',i===idx));
+  document.querySelectorAll('#esnodes .node').forEach((n,i)=>{const c=n.querySelector('circle');c.setAttribute('r',i===idx?11:6);c.setAttribute('fill',i<=idx?'#E0763B':'#0c0b0a');});
+}
+document.querySelectorAll('#esnodes .node').forEach(n=>n.addEventListener('mouseenter',()=>setEs(+n.dataset.i)));
+
+if(!REDUCE){
+  gsap.registerPlugin(ScrollTrigger);
+  try{var LC=window.Lenis&&(window.Lenis.default||window.Lenis);if(LC){var lenis=new LC({lerp:.09});window.__lenis=lenis;lenis.on('scroll',()=>ScrollTrigger.update());gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);}}catch(e){}
+
+  ScrollTrigger.create({start:0,end:'max',onUpdate:s=>document.getElementById('prog').style.width=(s.progress*100)+'%'});
+  gsap.set('.hero h1 .ln span',{yPercent:110});
+  gsap.to('.hero h1 .ln span',{yPercent:0,duration:1.1,stagger:.12,ease:'power3.out',delay:.2});
+  gsap.from('.hero__sub',{opacity:0,y:24,duration:1,delay:.9,ease:'power2.out'});
+  gsap.to('#heroBg',{yPercent:18,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('#bleedImg',{yPercent:14,ease:'none',scrollTrigger:{trigger:'.bleed',start:'top bottom',end:'bottom top',scrub:true}});
+
+  // reflexión word reveal
+  const rf=document.getElementById('reflex');rf.innerHTML=rf.textContent.split(' ').map(w=>'<span class="w">'+w+'</span>').join(' ');
+  gsap.to('.reflex .w',{className:'w on',stagger:.05,ease:'none',scrollTrigger:{trigger:'.reflex',start:'top 72%',end:'bottom 60%',scrub:true}});
+
+  // pinned dimensiones (3 pasos)
+  ScrollTrigger.create({trigger:'#pinDim',start:'top top',end:'+=200%',pin:'#pin1',scrub:.5,
+    onUpdate:s=>setDim(Math.min(2,Math.floor(s.progress*3)))});
+  // pinned esencias (6 pasos)
+  ScrollTrigger.create({trigger:'#pinEs',start:'top top',end:'+=320%',pin:'#pin2',scrub:.5,
+    onUpdate:s=>{linkPath.setAttribute('stroke-dashoffset',total*(1-s.progress));setEs(Math.min(NN-1,Math.floor(s.progress*NN)));}});
+
+  gsap.utils.toArray('.reveal').forEach(el=>gsap.to(el,{opacity:1,y:0,duration:1,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 84%'}}));
+
+  const cur=document.getElementById('cursor');let cxp=innerWidth/2,cyp=innerHeight/2,tx=cxp,ty=cyp;
+  addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY});
+  gsap.ticker.add(()=>{cxp+=(tx-cxp)*.2;cyp+=(ty-cyp)*.2;cur.style.transform='translate('+cxp+'px,'+cyp+'px) translate(-50%,-50%)'});
+  document.querySelectorAll('a,.node,blockquote,h2').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('big'));el.addEventListener('mouseleave',()=>cur.classList.remove('big'));});
+}else{
+  document.querySelectorAll('.reveal').forEach(e=>{e.style.opacity=1;e.style.transform='none';});
+  document.querySelectorAll('.dimstep,.step').forEach(s=>s.classList.add('on'));
+  setDim(0);linkPath.setAttribute('stroke-dashoffset',0);
+}
+})();
+</script>
+</body>
+</html>
