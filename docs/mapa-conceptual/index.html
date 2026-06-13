@@ -16,33 +16,18 @@
       background: #f5f0eb;
       color: #1a1a1a;
       padding: 2rem 1rem;
-      overscroll-behavior: none;
     }
     .container { max-width: 1300px; margin: 0 auto; }
 
-    /* Neobrutalist blocks */
     .block {
       border: 4px solid #000;
       padding: 2rem;
       margin-bottom: 2.5rem;
       background: #fff;
       box-shadow: 8px 8px 0 #000;
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-    .block:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 12px 12px 0 #000;
     }
     .block--yellow { background: #fde74c; }
-    .block--pink { background: #ff6b9d; }
-    .block--cyan { background: #5bc0eb; }
-    .block--lime { background: #9bc53d; }
-    .block--orange { background: #f79256; }
-    .block--purple { background: #7b5ea7; color: #fff; }
     .block--gray { background: #1a1a1a; color: #fff; border-color: #fff; box-shadow: 8px 8px 0 #555; }
-    .block--rot-right { transform: rotate(0.6deg); }
-    .block--rot-left { transform: rotate(-0.5deg); }
-    .block--noshadow { box-shadow: none; }
 
     h1 {
       font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -51,18 +36,10 @@
       line-height: 1;
       letter-spacing: -0.02em;
     }
-    h2 {
-      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.01em;
-    }
-    h2 .hl {
-      background: #fde74c;
-      padding: 0 0.4rem;
-      border: 2px solid #000;
-      display: inline-block;
+    .hero .sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      max-width: 800px;
+      margin-top: 0.75rem;
     }
     .tag {
       display: inline-block;
@@ -74,87 +51,72 @@
       text-transform: uppercase;
       margin: 0.15rem;
     }
-    .hero { margin-bottom: 2rem; }
-    .hero .sub {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      max-width: 800px;
-      margin-top: 0.75rem;
-    }
 
-    /* Cytoscape containers */
-    .cy-wrap {
-      border: 4px solid #000;
-      background: #fff;
-      margin-bottom: 2.5rem;
-      position: relative;
-    }
-    .cy-wrap .cy-label {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 10;
-      background: #000;
-      color: #fff;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 0.3rem 0.8rem;
-      letter-spacing: 0.05em;
-    }
-    .cy-container {
-      width: 100%;
-      height: 520px;
-      display: block;
-      cursor: grab;
-    }
-    .cy-container:active { cursor: grabbing; }
-    .cy-container.loading {
-      background: #f5f0eb url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath fill='%23000' d='M20 0 L20 40 M0 20 L40 20' opacity='0.1' /%3E%3C/svg%3E");
-    }
-
-    /* Tab bar */
+    /* Tabs */
     .tabs {
       display: flex;
       flex-wrap: wrap;
       gap: 0;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.5rem;
       border-bottom: 4px solid #000;
     }
     .tab-btn {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      padding: 0.8rem 1.5rem;
+      padding: 0.7rem 1.2rem;
       border: 4px solid #000;
       border-bottom: none;
       background: #fff;
       cursor: pointer;
-      transition: 0.1s;
       margin-right: 4px;
       position: relative;
       top: 4px;
     }
-    .tab-btn:hover { background: #fde74c; transform: translateY(-2px); }
+    .tab-btn:hover { background: #fde74c; }
     .tab-btn.active {
       background: #1a1a1a;
       color: #fff;
       top: 0;
-      padding-bottom: calc(0.8rem + 4px);
+      padding-bottom: calc(0.7rem + 4px);
     }
 
-    /* Map info bar */
-    .map-info {
-      padding: 1rem 1.5rem;
+    /* Cytoscape */
+    .cy-wrap {
+      border: 4px solid #000;
+      background: #fff;
+      position: relative;
+    }
+    .cy-container {
+      width: 100%;
+      height: 540px;
+      display: block;
+      cursor: grab;
+      background: #faf8f5;
+    }
+    .cy-container:active { cursor: grabbing; }
+
+    .map-desc {
+      padding: 0.8rem 1.2rem;
       border: 4px solid #000;
       border-top: none;
       background: #fff;
-      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      margin-bottom: 2.5rem;
     }
-    .map-info p { font-size: 0.95rem; }
+    .map-desc strong { background: #fde74c; padding: 0 0.2rem; }
 
-    /* Footer */
+    .hint {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.05em;
+      color: #888;
+      padding: 0.3rem 1.2rem;
+      background: #f5f0eb;
+      border-top: 2px solid #000;
+    }
+
     .footer {
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
@@ -164,78 +126,47 @@
       margin-top: 2rem;
     }
 
-    /* Interaction hint */
-    .hint {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #888;
-      padding: 0.3rem 1.5rem;
-      background: #f5f0eb;
-      border-top: 1px solid #000;
-    }
-
     @media (max-width: 600px) {
       body { padding: 0.8rem 0.3rem; }
       .block { padding: 1rem; }
-      .tab-btn { font-size: 0.7rem; padding: 0.5rem 0.8rem; }
-      .cy-container { height: 360px; }
+      .tab-btn { font-size: 0.6rem; padding: 0.5rem 0.6rem; }
+      .cy-container { height: 380px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <!-- HERO -->
-    <header class="hero">
-      <div class="block block--yellow block--rot-right">
-        <h1>Estados Afectivos</h1>
-        <p class="sub">
-          Tres mapas conceptuales interactivos de la secci&oacute;n 2.2 del documento <em>Educaci&oacute;n Socioemocional en el marco de la Nueva Escuela Mexicana</em> (SEP, 2024). Arrastra los nodos, haz zoom, pasa el cursor para explorar.
-        </p>
-        <div style="margin-top:1rem;">
-          <span class="tag">SEP 2024</span>
-          <span class="tag">NEM</span>
-          <span class="tag">Cytoscape.js</span>
-          <span class="tag">dagre</span>
-        </div>
+    <header class="block block--yellow">
+      <h1>Estados Afectivos</h1>
+      <p class="sub">
+        Mapas conceptuales de la secci&oacute;n 2.2 &mdash; <em>Educaci&oacute;n Socioemocional NEM</em> (SEP, 2024).
+        Arrastra nodos, zoom, y pasa el cursor para explorar.
+      </p>
+      <div style="margin-top:0.8rem;">
+        <span class="tag">SEP 2024</span>
+        <span class="tag">NEM</span>
+        <span class="tag">Novak</span>
+        <span class="tag">Cytoscape.js</span>
       </div>
     </header>
 
-    <!-- INTRO BLOCK -->
-    <div class="block block--gray">
-      <p style="font-size:1.05rem;font-weight:500;">
-        &ldquo;A diferencia de un <em>mindmap</em> (asociaci&oacute;n libre) o un <em>flowchart</em> (proceso secuencial), un <strong>mapa conceptual</strong> es una representaci&oacute;n jer&aacute;rquica de <strong>proposiciones</strong>: cada conexi&oacute;n entre dos conceptos incluye una <strong>palabra de enlace</strong> que forma un enunciado con sentido.&rdquo;
-      </p>
-      <p style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;margin-top:0.5rem;">
-        &mdash; Novak (1984), basado en Ausubel
-      </p>
-    </div>
-
-    <!-- TABS -->
     <div class="tabs" id="tabs">
-      <button class="tab-btn active" data-map="0">1. Estructura ESE</button>
-      <button class="tab-btn" data-map="1">2. Fen&oacute;menos Afectivos</button>
-      <button class="tab-btn" data-map="2">3. Afrontamiento</button>
+      <button class="tab-btn active" data-map="0">Estructura ESE</button>
+      <button class="tab-btn" data-map="1">Fen&oacute;menos Afectivos</button>
+      <button class="tab-btn" data-map="2">Afrontamiento</button>
     </div>
 
-    <!-- MAP INFO -->
-    <div class="map-info" id="mapInfo">
-      <p id="mapDesc">Estructura general de la Educación Socioemocional en la NEM. El concepto raíz es <em>Educación Socioemocional NEM</em>, que se define como un proceso gradual, se compone de elementos esenciales y se fundamenta en el conocimiento de los estados afectivos.</p>
+    <div class="map-desc" id="mapDesc"></div>
+
+    <div class="cy-wrap">
+      <div class="cy-container" id="cyContainer"></div>
+      <div class="hint">Arrastra nodos &middot; Rueda para zoom &middot; Hover para resaltar conexiones</div>
     </div>
 
-    <!-- CYTOSCAPE CONTAINER -->
-    <div class="cy-wrap" id="cyWrap">
-      <div class="cy-label">Mapa Conceptual</div>
-      <div class="cy-container loading" id="cyContainer"></div>
-      <div class="hint">+ Arrastra nodos &middot; Rueda para zoom &middot; Pasa el cursor para explorar</div>
-    </div>
-
-    <!-- FOOTER -->
     <footer class="footer">
-      <p>Estilo <strong>neobrutalista</strong> + <strong>Cytoscape.js</strong> + <strong>dagre</strong></p>
-      <p style="margin-top:0.3rem;"><a href="https://github.com/HesusG/esencia-del-tutor" target="_blank">HesusG/esencia-del-tutor</a></p>
+      <p><strong>neobrutalismo</strong> + <strong>Cytoscape.js</strong> + <strong>dagre</strong></p>
+      <p style="margin-top:0.3rem;"><a href="https://github.com/HesusG/esencia-del-tutor">HesusG/esencia-del-tutor</a></p>
     </footer>
 
   </div>
@@ -243,138 +174,134 @@
   <script>
     cytoscape.use(cytoscapeDagre);
 
-    // ===== GRAPH DATA =====
     const maps = [{
       title: 'Estructura ESE',
-      desc: 'Estructura general de la Educación Socioemocional en la NEM. El concepto raíz es <em>Educación Socioemocional NEM</em>, que se define como un proceso gradual, se compone de elementos esenciales y se fundamenta en el conocimiento de los estados afectivos.',
+      desc: 'Raíz: <strong>Ed. Socioemocional NEM</strong> se define como <strong>proceso gradual</strong>, se compone de <strong>6 elementos</strong> y se fundamenta en el <strong>conocimiento de estados afectivos</strong>, que se bifurca en fenómenos afectivos y afrontamiento.',
       elements: [
-        { group: 'nodes', data: { id: 'A', label: 'Educación Socioemocional NEM', bg: '#662D91', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'B', label: 'Proceso gradual para\ndesarrollar habilidades', bg: '#29ABE2', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C', label: 'Elementos\nesenciales (2.1)', bg: '#F7931E', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D', label: 'Conocimiento de\nEstados Afectivos (2.2)', bg: '#F7931E', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C1', label: 'Conocimiento\nde sí', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C2', label: 'Conocimiento de\nEstados Afectivos', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C3', label: 'Cuidado de sí\ny de otros', bg: '#39B54A', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'A', label: 'Ed. Socioemocional\nNEM', bg: '#662D91', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'B', label: 'Proceso\ngradual', bg: '#29ABE2', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C', label: 'Elementos\nesenciales', bg: '#F7931E', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'D', label: 'Conocimiento\nEstados Afectivos', bg: '#F7931E', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C1', label: 'Autoconocimiento', bg: '#39B54A', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C2', label: 'Conocimiento\nafectivo', bg: '#39B54A', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C3', label: 'Cuidado propio\ny de otros', bg: '#39B54A', fg: '#fff' } },
         { group: 'nodes', data: { id: 'C4', label: 'Proyecto\nde vida', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C5', label: 'Habilidades\nSociales', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C6', label: 'Educación Integral\nen Sexualidad', bg: '#39B54A', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C5', label: 'Habilidades\nsociales', bg: '#39B54A', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C6', label: 'Educación\nsexual', bg: '#39B54A', fg: '#fff' } },
         { group: 'nodes', data: { id: 'E', label: 'Fenómenos\nAfectivos', bg: '#29ABE2', fg: '#fff' } },
         { group: 'nodes', data: { id: 'F', label: 'Afrontamiento', bg: '#39B54A', fg: '#fff' } },
         { group: 'nodes', data: { id: 'G', label: 'Emociones', bg: '#FF6B9D', fg: '#fff' } },
         { group: 'nodes', data: { id: 'H', label: 'Estados de\nÁnimo', bg: '#FF6B9D', fg: '#fff' } },
         { group: 'nodes', data: { id: 'I', label: 'Sentimientos', bg: '#FF6B9D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'J', label: '¿La situación\nse puede cambiar?', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'K', label: 'Resolución de\nProblemas', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'L', label: 'Afrontamiento\ncentrado en\nSentimientos', bg: '#9BC53D', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'J', label: '¿Cambiable?', bg: '#FDE74C', fg: '#000' } },
+        { group: 'nodes', data: { id: 'K', label: 'Resolver\nproblema', bg: '#5BC0EB', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'L', label: 'Afrontar\nsentimiento', bg: '#9BC53D', fg: '#fff' } },
 
-        { group: 'edges', data: { id: 'e1', source: 'A', target: 'B', label: 'se define como' } },
-        { group: 'edges', data: { id: 'e2', source: 'A', target: 'C', label: 'se compone de' } },
-        { group: 'edges', data: { id: 'e3', source: 'A', target: 'D', label: 'se fundamenta en' } },
+        { group: 'edges', data: { id: 'e1', source: 'A', target: 'B', label: 'es' } },
+        { group: 'edges', data: { id: 'e2', source: 'A', target: 'C', label: 'contiene' } },
+        { group: 'edges', data: { id: 'e3', source: 'A', target: 'D', label: 'se basa en' } },
         { group: 'edges', data: { id: 'e4', source: 'C', target: 'C1', label: 'incluye' } },
         { group: 'edges', data: { id: 'e5', source: 'C', target: 'C2', label: 'incluye' } },
         { group: 'edges', data: { id: 'e6', source: 'C', target: 'C3', label: 'incluye' } },
         { group: 'edges', data: { id: 'e7', source: 'C', target: 'C4', label: 'incluye' } },
         { group: 'edges', data: { id: 'e8', source: 'C', target: 'C5', label: 'incluye' } },
         { group: 'edges', data: { id: 'e9', source: 'C', target: 'C6', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e10', source: 'C2', target: 'D', label: 'se desarrolla en', style: 'dashed' } },
+        { group: 'edges', data: { id: 'e10', source: 'C2', target: 'D', label: 'deriva en', style: 'dashed' } },
         { group: 'edges', data: { id: 'e11', source: 'D', target: 'E', label: 'se divide en' } },
         { group: 'edges', data: { id: 'e12', source: 'D', target: 'F', label: 'requiere' } },
         { group: 'edges', data: { id: 'e13', source: 'E', target: 'G', label: 'clasifica' } },
         { group: 'edges', data: { id: 'e14', source: 'E', target: 'H', label: 'clasifica' } },
         { group: 'edges', data: { id: 'e15', source: 'E', target: 'I', label: 'clasifica' } },
-        { group: 'edges', data: { id: 'e16', source: 'F', target: 'J', label: 'se bifurca según' } },
-        { group: 'edges', data: { id: 'e17', source: 'J', target: 'K', label: 'sí →' } },
-        { group: 'edges', data: { id: 'e18', source: 'J', target: 'L', label: 'no →' } },
+        { group: 'edges', data: { id: 'e16', source: 'F', target: 'J', label: 'depende de' } },
+        { group: 'edges', data: { id: 'e17', source: 'J', target: 'K', label: 'sí' } },
+        { group: 'edges', data: { id: 'e18', source: 'J', target: 'L', label: 'no' } },
       ]
     }, {
       title: 'Fenómenos Afectivos',
-      desc: 'Proposiciones que distinguen <strong>emociones</strong> (intensas, breves, universales), <strong>estados de ánimo</strong> (difusos, duraderos, multicausales) y <strong>sentimientos</strong> (privados, intencionales, basados en significado personal). Las flechas punteadas muestran la relación temporal entre los tres fenómenos.',
+      desc: 'Tres fen&oacute;menos: <strong>emociones</strong> (intensas, breves, universales), <strong>estados de &aacute;nimo</strong> (difusos, duraderos) y <strong>sentimientos</strong> (privados, reflexivos). Flechas punteadas = relaci&oacute;n temporal entre ellos.',
       elements: [
         { group: 'nodes', data: { id: 'A', label: 'Emociones', bg: '#29ABE2', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'A1', label: 'Intensas\ny breves', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'A2', label: 'Respuesta inmediata\nante amenaza u\noportunidad', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'A3', label: 'Públicamente\n(rostro, cuerpo)', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'A4', label: 'Universales\n(compartidas por toda\nla especie humana)', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'A5', label: 'Básicas: alegría,\ntristeza, miedo,\nenojo, sorpresa, asco', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'A6', label: 'Secundarias: familias\nde emociones\n(ej: enojo va de\nmolestia a furia)', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'B', label: 'Estados de Ánimo', bg: '#F7931E', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'B1', label: 'Menos intensos\ny más duraderos\nque las emociones', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'B2', label: 'Factores múltiples:\ninternos (hambre, sueño,\nestrés) y externos\n(clima, contaminación)', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'B3', label: 'Indicadores de la\ndisposición del cuerpo\npara actuar o descansar', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'B4', label: 'La conducta y la\nforma de pensar\nde forma sostenida', bg: '#FDE74C', fg: '#000' } },
+        { group: 'nodes', data: { id: 'A1', label: 'Intensas\nbreves', bg: '#5BC0EB', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'A2', label: 'Respuesta\ninmediata', bg: '#5BC0EB', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'A3', label: 'Expresión\npública', bg: '#5BC0EB', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'A4', label: 'Universales', bg: '#5BC0EB', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'A5', label: 'Básicas\n(6 tipos)', bg: '#5BC0EB', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'A6', label: 'Secundarias\n(familias)', bg: '#5BC0EB', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'B', label: 'Estados de\nÁnimo', bg: '#F7931E', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'B1', label: 'Difusos\nduraderos', bg: '#FDE74C', fg: '#000' } },
+        { group: 'nodes', data: { id: 'B2', label: 'Causas\nmúltiples', bg: '#FDE74C', fg: '#000' } },
+        { group: 'nodes', data: { id: 'B3', label: 'Indicador\ncorporal', bg: '#FDE74C', fg: '#000' } },
+        { group: 'nodes', data: { id: 'B4', label: 'Influye en\nconducta', bg: '#FDE74C', fg: '#000' } },
         { group: 'nodes', data: { id: 'C', label: 'Sentimientos', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C1', label: 'Duraderos, estables\ny de baja intensidad', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C2', label: 'Privados e\nintencionales\n(dirigidos a un objeto\no persona específica)', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C3', label: 'Emoción + reflexión\n+ memoria +\nsignificado personal', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C4', label: 'La "firma personal":\nlo que cada quien\nconsidera importante\nen la vida', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C5', label: 'Creencias con base\nen valoraciones\npersonales', bg: '#9BC53D', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C1', label: 'Estables\nduraderos', bg: '#9BC53D', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C2', label: 'Privados\nintencionales', bg: '#9BC53D', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C3', label: 'Emoción +\nreflexión', bg: '#9BC53D', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C4', label: 'Firma\npersonal', bg: '#9BC53D', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C5', label: 'Creencias\nvalorativas', bg: '#9BC53D', fg: '#fff' } },
 
-        { group: 'edges', data: { id: 'e1', source: 'A', target: 'A1', label: 'se caracterizan por ser' } },
-        { group: 'edges', data: { id: 'e2', source: 'A', target: 'A2', label: 'tienen función de' } },
-        { group: 'edges', data: { id: 'e3', source: 'A', target: 'A3', label: 'se expresan' } },
+        { group: 'edges', data: { id: 'e1', source: 'A', target: 'A1', label: 'son' } },
+        { group: 'edges', data: { id: 'e2', source: 'A', target: 'A2', label: 'dan' } },
+        { group: 'edges', data: { id: 'e3', source: 'A', target: 'A3', label: 'tienen' } },
         { group: 'edges', data: { id: 'e4', source: 'A', target: 'A4', label: 'son' } },
-        { group: 'edges', data: { id: 'e5', source: 'A', target: 'A5', label: 'se clasifican en' } },
-        { group: 'edges', data: { id: 'e6', source: 'A5', target: 'A6', label: 'se modulan por intensidad\ny dan origen a' } },
-        { group: 'edges', data: { id: 'e7', source: 'B', target: 'B1', label: 'se caracterizan por ser' } },
-        { group: 'edges', data: { id: 'e8', source: 'B', target: 'B2', label: 'son causados por' } },
-        { group: 'edges', data: { id: 'e9', source: 'B', target: 'B3', label: 'funcionan como' } },
-        { group: 'edges', data: { id: 'e10', source: 'B', target: 'B4', label: 'influyen en' } },
-        { group: 'edges', data: { id: 'e11', source: 'C', target: 'C1', label: 'se caracterizan por ser' } },
+        { group: 'edges', data: { id: 'e5', source: 'A', target: 'A5', label: 'tipos' } },
+        { group: 'edges', data: { id: 'e6', source: 'A5', target: 'A6', label: 'derivan en' } },
+        { group: 'edges', data: { id: 'e7', source: 'B', target: 'B1', label: 'son' } },
+        { group: 'edges', data: { id: 'e8', source: 'B', target: 'B2', label: 'por' } },
+        { group: 'edges', data: { id: 'e9', source: 'B', target: 'B3', label: 'como' } },
+        { group: 'edges', data: { id: 'e10', source: 'B', target: 'B4', label: 'afectan' } },
+        { group: 'edges', data: { id: 'e11', source: 'C', target: 'C1', label: 'son' } },
         { group: 'edges', data: { id: 'e12', source: 'C', target: 'C2', label: 'son' } },
-        { group: 'edges', data: { id: 'e13', source: 'C', target: 'C3', label: 'surgen de' } },
+        { group: 'edges', data: { id: 'e13', source: 'C', target: 'C3', label: 'nacen de' } },
         { group: 'edges', data: { id: 'e14', source: 'C', target: 'C4', label: 'expresan' } },
         { group: 'edges', data: { id: 'e15', source: 'C', target: 'C5', label: 'son' } },
-        { group: 'edges', data: { id: 'e16', source: 'A', target: 'B', label: 'se prolongan en', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e17', source: 'B', target: 'C', label: 'se consolidan en', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e18', source: 'A', target: 'C', label: 'son materia prima de', style: 'dashed' } },
+        { group: 'edges', data: { id: 'e16', source: 'A', target: 'B', label: 'se alargan en', style: 'dashed' } },
+        { group: 'edges', data: { id: 'e17', source: 'B', target: 'C', label: 'se fijan en', style: 'dashed' } },
+        { group: 'edges', data: { id: 'e18', source: 'A', target: 'C', label: 'alimentan a', style: 'dashed' } },
       ]
     }, {
       title: 'Afrontamiento',
-      desc: 'El nodo central es la <strong>valoración</strong> de si la situación se puede cambiar. La bifurcación produce dos rutas: <em>resolución de problemas</em> (cuando hay agencia) o <em>afrontamiento centrado en sentimientos</em> (cuando no). La flecha de retroalimentación en la rama de resolución indica que si la estrategia no funciona, se revalora.',
+      desc: 'Nodo clave: <strong>valorar si la situaci&oacute;n puede cambiar</strong>. Si <strong>s&iacute;</strong> &rarr; ruta de resoluci&oacute;n de problemas. Si <strong>no</strong> &rarr; afrontamiento centrado en sentimientos (evitaci&oacute;n, revaluaci&oacute;n, distanciamiento, negaci&oacute;n, ilusi&oacute;n). La flecha punteada de retorno indica revaloraci&oacute;n si falla.',
       elements: [
-        { group: 'nodes', data: { id: 'A', label: 'Situación que\ngenera afecto', bg: '#662D91', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'B', label: 'Valoración:\n¿la situación\nse puede cambiar?', bg: '#F7931E', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C', label: 'Resolución de\nProblemas', bg: '#29ABE2', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D', label: 'Afrontamiento centrado\nen Sentimientos', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C1', label: 'Identificar el\nproblema', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C2', label: 'Valorar si tiene\nsolución', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C3', label: 'Decidir acciones\nespecíficas', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C4', label: 'Ejecutar y\nevaluar resultado', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D1', label: 'Evitación:\nno pensar en\nel problema', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D2', label: 'Revaluación:\ncambiar el significado\npersonal de lo que pasa', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D3', label: 'Distanciamiento:\nalejarse emocionalmente\nde la situación', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D4', label: 'Negación:\nrechazar la realidad\natemorizante', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D5', label: 'Ilusión:\ndesear que las cosas\nfueran diferentes', bg: '#99d8d0', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'E', label: 'Útil si nada puede\nhacerse; débil porque\nno resuelve la causa', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'E2', label: 'La más poderosa y\nduradera porque cambia\nla interpretación,\nno los hechos', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'E3', label: 'Necesaria para\nprofesiones de ayuda:\nmédicos, psicólogos,\ndocentes', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'E4', label: 'Protectora en trauma\npero peligrosa si\nimpide ver la realidad', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'E5', label: 'Promueve tolerancia,\nresiliencia y esperanza\nante injusticias', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'F2', label: 'La clave: valorar\nla situación y elegir\nla estrategia adecuada', bg: '#7B5EA7', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'A', label: 'Situación\nafectiva', bg: '#662D91', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'B', label: '¿Cambiable?', bg: '#F7931E', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C', label: 'Resolver\nproblema', bg: '#29ABE2', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'D', label: 'Afrontar\nsentimiento', bg: '#39B54A', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C1', label: 'Identificar', bg: '#5BC0EB', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C2', label: 'Evaluar\nsolución', bg: '#5BC0EB', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C3', label: 'Decidir\nacciones', bg: '#5BC0EB', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'C4', label: 'Ejecutar y\nrevisar', bg: '#5BC0EB', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'D1', label: 'Evitación', bg: '#9BC53D', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'D2', label: 'Revaluación', bg: '#9BC53D', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'D3', label: 'Distanciamiento', bg: '#9BC53D', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'D4', label: 'Negación', bg: '#9BC53D', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'D5', label: 'Ilusión', bg: '#9BC53D', fg: '#fff' } },
+        { group: 'nodes', data: { id: 'X1', label: 'Útil si no\nhay solución', bg: '#FDE74C', fg: '#000' } },
+        { group: 'nodes', data: { id: 'X2', label: 'La más\npoderosa', bg: '#FDE74C', fg: '#000' } },
+        { group: 'nodes', data: { id: 'X3', label: 'Necesario\nen ayuda', bg: '#FDE74C', fg: '#000' } },
+        { group: 'nodes', data: { id: 'X4', label: 'Protector\no peligro', bg: '#FDE74C', fg: '#000' } },
+        { group: 'nodes', data: { id: 'X5', label: 'Da esperanza\ny tolerancia', bg: '#FDE74C', fg: '#000' } },
 
         { group: 'edges', data: { id: 'e1', source: 'A', target: 'B', label: 'requiere' } },
-        { group: 'edges', data: { id: 'e2', source: 'B', target: 'C', label: 'sí → se activa' } },
-        { group: 'edges', data: { id: 'e3', source: 'B', target: 'D', label: 'no → se activa' } },
-        { group: 'edges', data: { id: 'e4', source: 'C', target: 'C1', label: 'consiste en' } },
-        { group: 'edges', data: { id: 'e5', source: 'C1', target: 'C2', label: 'luego' } },
-        { group: 'edges', data: { id: 'e6', source: 'C2', target: 'C3', label: 'luego' } },
-        { group: 'edges', data: { id: 'e7', source: 'C3', target: 'C4', label: 'luego' } },
-        { group: 'edges', data: { id: 'e8', source: 'C4', target: 'B', label: 'si no funciona →', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e10', source: 'D', target: 'D1', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e11', source: 'D', target: 'D2', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e12', source: 'D', target: 'D3', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e13', source: 'D', target: 'D4', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e14', source: 'D', target: 'D5', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e15', source: 'D1', target: 'E', label: 'puede ser', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e16', source: 'D2', target: 'E2', label: 'es la más', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e17', source: 'D3', target: 'E3', label: 'es necesaria para', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e18', source: 'D4', target: 'E4', label: 'puede ser', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e19', source: 'D5', target: 'E5', label: 'promueve', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e20', source: 'B', target: 'F2', label: 'recordar:', style: 'dotted' } },
+        { group: 'edges', data: { id: 'e2', source: 'B', target: 'C', label: 'sí' } },
+        { group: 'edges', data: { id: 'e3', source: 'B', target: 'D', label: 'no' } },
+        { group: 'edges', data: { id: 'e4', source: 'C', target: 'C1', label: '1º' } },
+        { group: 'edges', data: { id: 'e5', source: 'C1', target: 'C2', label: '2º' } },
+        { group: 'edges', data: { id: 'e6', source: 'C2', target: 'C3', label: '3º' } },
+        { group: 'edges', data: { id: 'e7', source: 'C3', target: 'C4', label: '4º' } },
+        { group: 'edges', data: { id: 'e8', source: 'C4', target: 'B', label: 'si falla', style: 'dashed' } },
+        { group: 'edges', data: { id: 'e9', source: 'D', target: 'D1', label: 'incluye' } },
+        { group: 'edges', data: { id: 'e10', source: 'D', target: 'D2', label: 'incluye' } },
+        { group: 'edges', data: { id: 'e11', source: 'D', target: 'D3', label: 'incluye' } },
+        { group: 'edges', data: { id: 'e12', source: 'D', target: 'D4', label: 'incluye' } },
+        { group: 'edges', data: { id: 'e13', source: 'D', target: 'D5', label: 'incluye' } },
+        { group: 'edges', data: { id: 'e14', source: 'D1', target: 'X1', label: 'pero', style: 'dashed' } },
+        { group: 'edges', data: { id: 'e15', source: 'D2', target: 'X2', label: 'es', style: 'dashed' } },
+        { group: 'edges', data: { id: 'e16', source: 'D3', target: 'X3', label: 'clave en', style: 'dashed' } },
+        { group: 'edges', data: { id: 'e17', source: 'D4', target: 'X4', label: 'según', style: 'dashed' } },
+        { group: 'edges', data: { id: 'e18', source: 'D5', target: 'X5', label: 'genera', style: 'dashed' } },
       ]
     }];
 
-    // ===== CYTOSCAPE STYLE =====
     const cyStyle = [
       {
         selector: 'node',
@@ -387,81 +314,20 @@
           'text-wrap': 'wrap',
           'font-family': 'Space Grotesk, sans-serif',
           'font-weight': 700,
-          'font-size': 13,
+          'font-size': 12,
           'width': 'label',
           'height': 'label',
           'shape': 'roundrectangle',
           'border-width': 3,
           'border-color': '#000',
-          'padding': '14px',
+          'padding': '12px',
           'shadow-blur': 0,
           'shadow-offset-x': 4,
           'shadow-offset-y': 4,
           'shadow-color': '#000',
           'shadow-opacity': 1,
-          'transition-property': 'shadow-offset-x, shadow-offset-y, background-color',
+          'transition-property': 'shadow-offset-x, shadow-offset-y',
           'transition-duration': 120,
-        }
-      },
-      {
-        selector: 'node:selected',
-        style: {
-          'shadow-offset-x': 6,
-          'shadow-offset-y': 6,
-        }
-      },
-      {
-        selector: 'node:active',
-        style: {
-          'shadow-offset-x': 2,
-          'shadow-offset-y': 2,
-        }
-      },
-      {
-        selector: 'edge',
-        style: {
-          'width': 3,
-          'line-color': '#000',
-          'target-arrow-color': '#000',
-          'target-arrow-shape': 'triangle',
-          'arrow-scale': 1.3,
-          'curve-style': 'bezier',
-          'label': 'data(label)',
-          'color': '#1a1a1a',
-          'font-family': 'JetBrains Mono, monospace',
-          'font-size': 10,
-          'font-weight': 700,
-          'text-background-color': '#fff',
-          'text-background-opacity': 1,
-          'text-background-padding': 4,
-          'text-background-shape': 'roundrectangle',
-          'text-rotation': 'autorotate',
-          'text-margin-y': -4,
-          'target-distance-from-node': 8,
-          'source-distance-from-node': 8,
-          'transition-property': 'width, line-color',
-          'transition-duration': 120,
-        }
-      },
-      {
-        selector: 'edge[style = "dashed"]',
-        style: {
-          'line-style': 'dashed',
-          'line-dash-pattern': [6, 4],
-        }
-      },
-      {
-        selector: 'edge[style = "dotted"]',
-        style: {
-          'line-style': 'dotted',
-          'line-dash-pattern': [2, 3],
-        }
-      },
-      {
-        selector: 'edge:selected',
-        style: {
-          'width': 4,
-          'line-color': '#FDE74C',
         }
       },
       {
@@ -473,6 +339,37 @@
         }
       },
       {
+        selector: 'edge',
+        style: {
+          'width': 3,
+          'line-color': '#000',
+          'target-arrow-color': '#000',
+          'target-arrow-shape': 'triangle',
+          'arrow-scale': 1.2,
+          'curve-style': 'bezier',
+          'label': 'data(label)',
+          'color': '#1a1a1a',
+          'font-family': 'JetBrains Mono, monospace',
+          'font-size': 9,
+          'font-weight': 700,
+          'text-background-color': '#fff',
+          'text-background-opacity': 1,
+          'text-background-padding': 3,
+          'text-background-shape': 'roundrectangle',
+          'text-rotation': 'autorotate',
+          'text-margin-y': -3,
+          'target-distance-from-node': 6,
+          'source-distance-from-node': 6,
+        }
+      },
+      {
+        selector: 'edge[style = "dashed"]',
+        style: {
+          'line-style': 'dashed',
+          'line-dash-pattern': [6, 4],
+        }
+      },
+      {
         selector: 'edge.hover',
         style: {
           'width': 4,
@@ -481,77 +378,55 @@
       },
     ];
 
-    // ===== INIT =====
-    let currentMap = 0;
     let cy;
 
-    function createGraph(mapIndex) {
-      const container = document.getElementById('cyContainer');
-      container.innerHTML = '';
-      container.classList.add('loading');
-
-      const mapData = maps[mapIndex];
-
-      if (cy) { cy.destroy(); }
-
+    function makeMap(idx) {
+      const el = document.getElementById('cyContainer');
+      el.innerHTML = '';
+      if (cy) cy.destroy();
+      document.getElementById('mapDesc').innerHTML = maps[idx].desc;
       setTimeout(() => {
         cy = cytoscape({
-          container,
-          elements: mapData.elements,
+          container: el,
+          elements: maps[idx].elements,
           style: cyStyle,
           layout: {
             name: 'dagre',
             rankDir: 'TB',
-            nodeSep: 60,
-            rankSep: 80,
-            edgeSep: 20,
-            spacingFactor: 1.3,
+            nodeSep: 40,
+            rankSep: 70,
+            edgeSep: 15,
+            spacingFactor: 1.2,
             animate: true,
-            animationDuration: 600,
+            animationDuration: 500,
             animationEasing: 'ease-out',
           },
           minZoom: 0.4,
           maxZoom: 2.5,
           wheelSensitivity: 0.3,
         });
-
-        container.classList.remove('loading');
-
-        // Hover highlighting
         cy.on('mouseover', 'node', function(e) {
-          const node = e.target;
-          node.addClass('hover');
-          node.connectedEdges().addClass('hover');
-          node.connectedEdges().connectedNodes().addClass('hover');
+          const n = e.target;
+          n.addClass('hover');
+          n.connectedEdges().addClass('hover');
+          n.connectedEdges().connectedNodes().addClass('hover');
         });
-        cy.on('mouseout', 'node', function(e) {
+        cy.on('mouseout', 'node', function() {
           cy.elements().removeClass('hover');
         });
-
-        // Fit after layout
-        cy.on('layoutready', () => {
-          setTimeout(() => { cy.fit(64); }, 100);
-        });
-
-        // Update info
-        document.getElementById('mapDesc').innerHTML = mapData.desc;
-
-      }, 80);
+        cy.on('layoutready', () => setTimeout(() => cy.fit(60), 150));
+      }, 60);
     }
 
-    // ===== TABS =====
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.addEventListener('click', function() {
+        document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
         this.classList.add('active');
-        const idx = parseInt(this.dataset.map);
-        currentMap = idx;
-        createGraph(idx);
+        makeMap(parseInt(this.dataset.map));
       });
     });
 
-    // ===== START =====
-    createGraph(0);
+    makeMap(0);
   </script>
 </body>
 </html>
