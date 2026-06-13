@@ -3,430 +3,336 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mapa Conceptual · Estados Afectivos · NEM</title>
+  <title>Estados Afectivos · Mapa Conceptual NEM</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
-  <script src="https://unpkg.com/cytoscape-dagre@1.1.3/cytoscape-dagre.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.9/styles/vis-network.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.9/standalone/umd/vis-network.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
     body {
       font-family: 'Space Grotesk', sans-serif;
       background: #f5f0eb;
       color: #1a1a1a;
-      padding: 2rem 1rem;
+      padding: 1.5rem;
     }
-    .container { max-width: 1300px; margin: 0 auto; }
+    .wrap { max-width: 1400px; margin: 0 auto; }
 
-    .block {
+    .hero {
       border: 4px solid #000;
-      padding: 2rem;
-      margin-bottom: 2.5rem;
-      background: #fff;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      background: #fde74c;
       box-shadow: 8px 8px 0 #000;
     }
-    .block--yellow { background: #fde74c; }
-    .block--gray { background: #1a1a1a; color: #fff; border-color: #fff; box-shadow: 8px 8px 0 #555; }
-
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
+    .hero h1 {
+      font-size: clamp(2rem,5vw,4rem);
       font-weight: 700;
       text-transform: uppercase;
-      line-height: 1;
       letter-spacing: -0.02em;
+      line-height: 1;
     }
-    .hero .sub {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      max-width: 800px;
-      margin-top: 0.75rem;
+    .hero p {
+      font-size: clamp(0.85rem,1.5vw,1.1rem);
+      max-width: 750px;
+      margin-top: 0.5rem;
     }
-    .tag {
+    .tags { margin-top: 0.5rem; }
+    .tags span {
       display: inline-block;
       border: 2px solid #000;
-      padding: 0.2rem 0.6rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin: 0.15rem;
-    }
-
-    /* Tabs */
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-      margin-bottom: 1.5rem;
-      border-bottom: 4px solid #000;
-    }
-    .tab-btn {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      padding: 0.7rem 1.2rem;
-      border: 4px solid #000;
-      border-bottom: none;
-      background: #fff;
-      cursor: pointer;
-      margin-right: 4px;
-      position: relative;
-      top: 4px;
-    }
-    .tab-btn:hover { background: #fde74c; }
-    .tab-btn.active {
-      background: #1a1a1a;
-      color: #fff;
-      top: 0;
-      padding-bottom: calc(0.7rem + 4px);
-    }
-
-    /* Cytoscape */
-    .cy-wrap {
-      border: 4px solid #000;
-      background: #fff;
-      position: relative;
-    }
-    .cy-container {
-      width: 100%;
-      height: 540px;
-      display: block;
-      cursor: grab;
-      background: #faf8f5;
-    }
-    .cy-container:active { cursor: grabbing; }
-
-    .map-desc {
-      padding: 0.8rem 1.2rem;
-      border: 4px solid #000;
-      border-top: none;
-      background: #fff;
-      font-size: 0.85rem;
-      margin-bottom: 2.5rem;
-    }
-    .map-desc strong { background: #fde74c; padding: 0 0.2rem; }
-
-    .hint {
+      padding: 0.15rem 0.5rem;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.6rem;
-      letter-spacing: 0.05em;
-      color: #888;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 0.1rem;
+    }
+
+    .info {
+      border: 4px solid #000;
+      padding: 0.8rem 1.2rem;
+      margin-bottom: 1.5rem;
+      background: #fff;
+      font-size: 0.85rem;
+    }
+    .info strong { background: #fde74c; padding: 0 0.2rem; }
+
+    #cy {
+      width: 100%;
+      height: 620px;
+      border: 4px solid #000;
+      background: #faf8f5;
+      cursor: grab;
+    }
+    #cy:active { cursor: grabbing; }
+
+    .hint {
+      border: 4px solid #000;
+      border-top: none;
       padding: 0.3rem 1.2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: #888;
       background: #f5f0eb;
-      border-top: 2px solid #000;
+      margin-bottom: 2rem;
     }
 
     .footer {
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      padding: 2rem 0;
+      font-size: 0.65rem;
       border-top: 4px solid #000;
-      margin-top: 2rem;
+      padding: 1.5rem 0;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      align-items: center;
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-dot {
+      width: 14px; height: 14px;
+      border: 2px solid #000;
+      display: inline-block;
     }
 
     @media (max-width: 600px) {
-      body { padding: 0.8rem 0.3rem; }
-      .block { padding: 1rem; }
-      .tab-btn { font-size: 0.6rem; padding: 0.5rem 0.6rem; }
-      .cy-container { height: 380px; }
+      body { padding: 0.5rem; }
+      .hero { padding: 1rem; }
+      #cy { height: 400px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrap">
 
-    <header class="block block--yellow">
+    <div class="hero">
       <h1>Estados Afectivos</h1>
-      <p class="sub">
-        Mapas conceptuales de la secci&oacute;n 2.2 &mdash; <em>Educaci&oacute;n Socioemocional NEM</em> (SEP, 2024).
-        Arrastra nodos, zoom, y pasa el cursor para explorar.
-      </p>
-      <div style="margin-top:0.8rem;">
-        <span class="tag">SEP 2024</span>
-        <span class="tag">NEM</span>
-        <span class="tag">Novak</span>
-        <span class="tag">Cytoscape.js</span>
+      <p>Mapa conceptual integrado &mdash; Educaci&oacute;n Socioemocional NEM (SEP, 2024). Los nodos aparecen con f&iacute;sica animada. Arrastra, haz zoom, explora.</p>
+      <div class="tags">
+        <span>SEP 2024</span>
+        <span>NEM</span>
+        <span>Novak</span>
+        <span>vis-network</span>
+        <span>force layout</span>
       </div>
-    </header>
-
-    <div class="tabs" id="tabs">
-      <button class="tab-btn active" data-map="0">Estructura ESE</button>
-      <button class="tab-btn" data-map="1">Fen&oacute;menos Afectivos</button>
-      <button class="tab-btn" data-map="2">Afrontamiento</button>
     </div>
 
-    <div class="map-desc" id="mapDesc"></div>
-
-    <div class="cy-wrap">
-      <div class="cy-container" id="cyContainer"></div>
-      <div class="hint">Arrastra nodos &middot; Rueda para zoom &middot; Hover para resaltar conexiones</div>
+    <div class="info">
+      <strong>&#9654; Estructura:</strong> Ed. Socioemocional NEM &rarr; proceso gradual + 6 elementos esenciales + se fundamenta en el conocimiento de estados afectivos, que se divide en <strong>fen&oacute;menos afectivos</strong> (emociones, estados de &aacute;nimo, sentimientos) y <strong>afrontamiento</strong> (resolver problema o manejar sentimiento).
     </div>
 
-    <footer class="footer">
-      <p><strong>neobrutalismo</strong> + <strong>Cytoscape.js</strong> + <strong>dagre</strong></p>
-      <p style="margin-top:0.3rem;"><a href="https://github.com/HesusG/esencia-del-tutor">HesusG/esencia-del-tutor</a></p>
-    </footer>
+    <div id="cy"></div>
+    <div class="hint">Arrastra nodos &middot; Rueda para zoom &middot; Mant&eacute;n y arrastra el fondo para mover el canvas</div>
+
+    <div class="footer">
+      <p><strong>neobrutalismo</strong> + <strong>vis-network</strong></p>
+      <p><a href="https://github.com/HesusG/esencia-del-tutor">HesusG/esencia-del-tutor</a></p>
+    </div>
 
   </div>
 
   <script>
-    cytoscape.use(cytoscapeDagre);
+    const nodes = new vis.DataSet([
+      // === NIVEL 0: RAÍZ ===
+      { id: 'A', label: 'Ed. Socioemocional\nNEM', color: { background: '#662D91', border: '#000' }, font: { color: '#fff', size: 16, face: 'Space Grotesk', fontWeight: '700' }, borderWidth: 4, margin: 14, shape: 'box' },
 
-    const maps = [{
-      title: 'Estructura ESE',
-      desc: 'Raíz: <strong>Ed. Socioemocional NEM</strong> se define como <strong>proceso gradual</strong>, se compone de <strong>6 elementos</strong> y se fundamenta en el <strong>conocimiento de estados afectivos</strong>, que se bifurca en fenómenos afectivos y afrontamiento.',
-      elements: [
-        { group: 'nodes', data: { id: 'A', label: 'Ed. Socioemocional\nNEM', bg: '#662D91', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'B', label: 'Proceso\ngradual', bg: '#29ABE2', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C', label: 'Elementos\nesenciales', bg: '#F7931E', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D', label: 'Conocimiento\nEstados Afectivos', bg: '#F7931E', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C1', label: 'Autoconocimiento', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C2', label: 'Conocimiento\nafectivo', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C3', label: 'Cuidado propio\ny de otros', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C4', label: 'Proyecto\nde vida', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C5', label: 'Habilidades\nsociales', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C6', label: 'Educación\nsexual', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'E', label: 'Fenómenos\nAfectivos', bg: '#29ABE2', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'F', label: 'Afrontamiento', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'G', label: 'Emociones', bg: '#FF6B9D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'H', label: 'Estados de\nÁnimo', bg: '#FF6B9D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'I', label: 'Sentimientos', bg: '#FF6B9D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'J', label: '¿Cambiable?', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'K', label: 'Resolver\nproblema', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'L', label: 'Afrontar\nsentimiento', bg: '#9BC53D', fg: '#fff' } },
+      // === NIVEL 1 ===
+      { id: 'B', label: 'Proceso\ngradual', color: { background: '#29ABE2', border: '#000' }, font: { color: '#fff', size: 13, face: 'Space Grotesk' }, borderWidth: 3, margin: 12, shape: 'box' },
+      { id: 'C', label: 'Elementos\nesenciales', color: { background: '#F7931E', border: '#000' }, font: { color: '#fff', size: 13, face: 'Space Grotesk' }, borderWidth: 3, margin: 12, shape: 'box' },
+      { id: 'D', label: 'Conocimiento\nEstados Afectivos', color: { background: '#F7931E', border: '#000' }, font: { color: '#fff', size: 13, face: 'Space Grotesk' }, borderWidth: 3, margin: 12, shape: 'box' },
 
-        { group: 'edges', data: { id: 'e1', source: 'A', target: 'B', label: 'es' } },
-        { group: 'edges', data: { id: 'e2', source: 'A', target: 'C', label: 'contiene' } },
-        { group: 'edges', data: { id: 'e3', source: 'A', target: 'D', label: 'se basa en' } },
-        { group: 'edges', data: { id: 'e4', source: 'C', target: 'C1', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e5', source: 'C', target: 'C2', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e6', source: 'C', target: 'C3', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e7', source: 'C', target: 'C4', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e8', source: 'C', target: 'C5', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e9', source: 'C', target: 'C6', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e10', source: 'C2', target: 'D', label: 'deriva en', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e11', source: 'D', target: 'E', label: 'se divide en' } },
-        { group: 'edges', data: { id: 'e12', source: 'D', target: 'F', label: 'requiere' } },
-        { group: 'edges', data: { id: 'e13', source: 'E', target: 'G', label: 'clasifica' } },
-        { group: 'edges', data: { id: 'e14', source: 'E', target: 'H', label: 'clasifica' } },
-        { group: 'edges', data: { id: 'e15', source: 'E', target: 'I', label: 'clasifica' } },
-        { group: 'edges', data: { id: 'e16', source: 'F', target: 'J', label: 'depende de' } },
-        { group: 'edges', data: { id: 'e17', source: 'J', target: 'K', label: 'sí' } },
-        { group: 'edges', data: { id: 'e18', source: 'J', target: 'L', label: 'no' } },
-      ]
-    }, {
-      title: 'Fenómenos Afectivos',
-      desc: 'Tres fen&oacute;menos: <strong>emociones</strong> (intensas, breves, universales), <strong>estados de &aacute;nimo</strong> (difusos, duraderos) y <strong>sentimientos</strong> (privados, reflexivos). Flechas punteadas = relaci&oacute;n temporal entre ellos.',
-      elements: [
-        { group: 'nodes', data: { id: 'A', label: 'Emociones', bg: '#29ABE2', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'A1', label: 'Intensas\nbreves', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'A2', label: 'Respuesta\ninmediata', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'A3', label: 'Expresión\npública', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'A4', label: 'Universales', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'A5', label: 'Básicas\n(6 tipos)', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'A6', label: 'Secundarias\n(familias)', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'B', label: 'Estados de\nÁnimo', bg: '#F7931E', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'B1', label: 'Difusos\nduraderos', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'B2', label: 'Causas\nmúltiples', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'B3', label: 'Indicador\ncorporal', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'B4', label: 'Influye en\nconducta', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'C', label: 'Sentimientos', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C1', label: 'Estables\nduraderos', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C2', label: 'Privados\nintencionales', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C3', label: 'Emoción +\nreflexión', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C4', label: 'Firma\npersonal', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C5', label: 'Creencias\nvalorativas', bg: '#9BC53D', fg: '#fff' } },
+      // === ELEMENTOS ESENCIALES (C) ===
+      { id: 'C1', label: 'Auto-\nconocimiento', color: { background: '#39B54A', border: '#000' }, font: { color: '#fff', size: 11, face: 'Space Grotesk' }, borderWidth: 3, margin: 10, shape: 'box' },
+      { id: 'C2', label: 'Conocimiento\nafectivo', color: { background: '#39B54A', border: '#000' }, font: { color: '#fff', size: 11, face: 'Space Grotesk' }, borderWidth: 3, margin: 10, shape: 'box' },
+      { id: 'C3', label: 'Cuidado\npropio', color: { background: '#39B54A', border: '#000' }, font: { color: '#fff', size: 11, face: 'Space Grotesk' }, borderWidth: 3, margin: 10, shape: 'box' },
+      { id: 'C4', label: 'Proyecto\nde vida', color: { background: '#39B54A', border: '#000' }, font: { color: '#fff', size: 11, face: 'Space Grotesk' }, borderWidth: 3, margin: 10, shape: 'box' },
+      { id: 'C5', label: 'Habilidades\nsociales', color: { background: '#39B54A', border: '#000' }, font: { color: '#fff', size: 11, face: 'Space Grotesk' }, borderWidth: 3, margin: 10, shape: 'box' },
+      { id: 'C6', label: 'Educación\nsexual', color: { background: '#39B54A', border: '#000' }, font: { color: '#fff', size: 11, face: 'Space Grotesk' }, borderWidth: 3, margin: 10, shape: 'box' },
 
-        { group: 'edges', data: { id: 'e1', source: 'A', target: 'A1', label: 'son' } },
-        { group: 'edges', data: { id: 'e2', source: 'A', target: 'A2', label: 'dan' } },
-        { group: 'edges', data: { id: 'e3', source: 'A', target: 'A3', label: 'tienen' } },
-        { group: 'edges', data: { id: 'e4', source: 'A', target: 'A4', label: 'son' } },
-        { group: 'edges', data: { id: 'e5', source: 'A', target: 'A5', label: 'tipos' } },
-        { group: 'edges', data: { id: 'e6', source: 'A5', target: 'A6', label: 'derivan en' } },
-        { group: 'edges', data: { id: 'e7', source: 'B', target: 'B1', label: 'son' } },
-        { group: 'edges', data: { id: 'e8', source: 'B', target: 'B2', label: 'por' } },
-        { group: 'edges', data: { id: 'e9', source: 'B', target: 'B3', label: 'como' } },
-        { group: 'edges', data: { id: 'e10', source: 'B', target: 'B4', label: 'afectan' } },
-        { group: 'edges', data: { id: 'e11', source: 'C', target: 'C1', label: 'son' } },
-        { group: 'edges', data: { id: 'e12', source: 'C', target: 'C2', label: 'son' } },
-        { group: 'edges', data: { id: 'e13', source: 'C', target: 'C3', label: 'nacen de' } },
-        { group: 'edges', data: { id: 'e14', source: 'C', target: 'C4', label: 'expresan' } },
-        { group: 'edges', data: { id: 'e15', source: 'C', target: 'C5', label: 'son' } },
-        { group: 'edges', data: { id: 'e16', source: 'A', target: 'B', label: 'se alargan en', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e17', source: 'B', target: 'C', label: 'se fijan en', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e18', source: 'A', target: 'C', label: 'alimentan a', style: 'dashed' } },
-      ]
-    }, {
-      title: 'Afrontamiento',
-      desc: 'Nodo clave: <strong>valorar si la situaci&oacute;n puede cambiar</strong>. Si <strong>s&iacute;</strong> &rarr; ruta de resoluci&oacute;n de problemas. Si <strong>no</strong> &rarr; afrontamiento centrado en sentimientos (evitaci&oacute;n, revaluaci&oacute;n, distanciamiento, negaci&oacute;n, ilusi&oacute;n). La flecha punteada de retorno indica revaloraci&oacute;n si falla.',
-      elements: [
-        { group: 'nodes', data: { id: 'A', label: 'Situación\nafectiva', bg: '#662D91', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'B', label: '¿Cambiable?', bg: '#F7931E', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C', label: 'Resolver\nproblema', bg: '#29ABE2', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D', label: 'Afrontar\nsentimiento', bg: '#39B54A', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C1', label: 'Identificar', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C2', label: 'Evaluar\nsolución', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C3', label: 'Decidir\nacciones', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'C4', label: 'Ejecutar y\nrevisar', bg: '#5BC0EB', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D1', label: 'Evitación', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D2', label: 'Revaluación', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D3', label: 'Distanciamiento', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D4', label: 'Negación', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'D5', label: 'Ilusión', bg: '#9BC53D', fg: '#fff' } },
-        { group: 'nodes', data: { id: 'X1', label: 'Útil si no\nhay solución', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'X2', label: 'La más\npoderosa', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'X3', label: 'Necesario\nen ayuda', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'X4', label: 'Protector\no peligro', bg: '#FDE74C', fg: '#000' } },
-        { group: 'nodes', data: { id: 'X5', label: 'Da esperanza\ny tolerancia', bg: '#FDE74C', fg: '#000' } },
+      // === FENÓMENOS AFECTIVOS (D→E) ===
+      { id: 'E', label: 'Fenómenos\nAfectivos', color: { background: '#29ABE2', border: '#000' }, font: { color: '#fff', size: 14, face: 'Space Grotesk' }, borderWidth: 3, margin: 12, shape: 'box' },
 
-        { group: 'edges', data: { id: 'e1', source: 'A', target: 'B', label: 'requiere' } },
-        { group: 'edges', data: { id: 'e2', source: 'B', target: 'C', label: 'sí' } },
-        { group: 'edges', data: { id: 'e3', source: 'B', target: 'D', label: 'no' } },
-        { group: 'edges', data: { id: 'e4', source: 'C', target: 'C1', label: '1º' } },
-        { group: 'edges', data: { id: 'e5', source: 'C1', target: 'C2', label: '2º' } },
-        { group: 'edges', data: { id: 'e6', source: 'C2', target: 'C3', label: '3º' } },
-        { group: 'edges', data: { id: 'e7', source: 'C3', target: 'C4', label: '4º' } },
-        { group: 'edges', data: { id: 'e8', source: 'C4', target: 'B', label: 'si falla', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e9', source: 'D', target: 'D1', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e10', source: 'D', target: 'D2', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e11', source: 'D', target: 'D3', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e12', source: 'D', target: 'D4', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e13', source: 'D', target: 'D5', label: 'incluye' } },
-        { group: 'edges', data: { id: 'e14', source: 'D1', target: 'X1', label: 'pero', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e15', source: 'D2', target: 'X2', label: 'es', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e16', source: 'D3', target: 'X3', label: 'clave en', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e17', source: 'D4', target: 'X4', label: 'según', style: 'dashed' } },
-        { group: 'edges', data: { id: 'e18', source: 'D5', target: 'X5', label: 'genera', style: 'dashed' } },
-      ]
-    }];
+      { id: 'EMO', label: 'Emociones', color: { background: '#FF6B9D', border: '#000' }, font: { color: '#fff', size: 13, face: 'Space Grotesk' }, borderWidth: 3, margin: 11, shape: 'box' },
+      { id: 'EMO1', label: 'Intensas y\nbreves', color: { background: '#FF8FB1', border: '#000' }, font: { color: '#fff', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 9, shape: 'box' },
+      { id: 'EMO2', label: 'Respuesta\ninmediata', color: { background: '#FF8FB1', border: '#000' }, font: { color: '#fff', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 9, shape: 'box' },
+      { id: 'EMO3', label: 'Universales', color: { background: '#FF8FB1', border: '#000' }, font: { color: '#fff', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 9, shape: 'box' },
+      { id: 'EMO4', label: '6 básicas', color: { background: '#FF8FB1', border: '#000' }, font: { color: '#fff', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 9, shape: 'box' },
+      { id: 'EMO5', label: 'Familias\nsecundarias', color: { background: '#FF8FB1', border: '#000' }, font: { color: '#fff', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 9, shape: 'box' },
 
-    const cyStyle = [
-      {
-        selector: 'node',
-        style: {
-          'background-color': 'data(bg)',
-          'label': 'data(label)',
-          'color': 'data(fg)',
-          'text-valign': 'center',
-          'text-halign': 'center',
-          'text-wrap': 'wrap',
-          'font-family': 'Space Grotesk, sans-serif',
-          'font-weight': 700,
-          'font-size': 12,
-          'width': 'label',
-          'height': 'label',
-          'shape': 'roundrectangle',
-          'border-width': 3,
-          'border-color': '#000',
-          'padding': '12px',
-          'shadow-blur': 0,
-          'shadow-offset-x': 4,
-          'shadow-offset-y': 4,
-          'shadow-color': '#000',
-          'shadow-opacity': 1,
-          'transition-property': 'shadow-offset-x, shadow-offset-y',
-          'transition-duration': 120,
-        }
+      { id: 'ANIMO', label: 'Estados de\nÁnimo', color: { background: '#F7931E', border: '#000' }, font: { color: '#fff', size: 13, face: 'Space Grotesk' }, borderWidth: 3, margin: 11, shape: 'box' },
+      { id: 'ANIMO1', label: 'Difusos y\nduraderos', color: { background: '#FDE74C', border: '#000' }, font: { color: '#000', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 9, shape: 'box' },
+      { id: 'ANIMO2', label: 'Causas\nmúltiples', color: { background: '#FDE74C', border: '#000' }, font: { color: '#000', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 9, shape: 'box' },
+      { id: 'ANIMO3', label: 'Indicador\ncorporal', color: { background: '#FDE74C', border: '#000' }, font: { color: '#000', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 9, shape: 'box' },
+
+      { id: 'SENT', label: 'Sentimientos', color: { background: '#39B54A', border: '#000' }, font: { color: '#fff', size: 13, face: 'Space Grotesk' }, borderWidth: 3, margin: 11, shape: 'box' },
+      { id: 'SENT1', label: 'Privados e\nintencionales', color: { background: '#9BC53D', border: '#000' }, font: { color: '#fff', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 9, shape: 'box' },
+      { id: 'SENT2', label: 'Emoción +\nreflexión', color: { background: '#9BC53D', border: '#000' }, font: { color: '#fff', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 9, shape: 'box' },
+      { id: 'SENT3', label: '"Firma\npersonal"', color: { background: '#9BC53D', border: '#000' }, font: { color: '#fff', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 9, shape: 'box' },
+      { id: 'SENT4', label: 'Creencias\nvalorativas', color: { background: '#9BC53D', border: '#000' }, font: { color: '#fff', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 9, shape: 'box' },
+
+      // === AFRONTAMIENTO (D→F) ===
+      { id: 'F', label: 'Afrontamiento', color: { background: '#39B54A', border: '#000' }, font: { color: '#fff', size: 13, face: 'Space Grotesk' }, borderWidth: 3, margin: 11, shape: 'box' },
+      { id: 'FQ', label: '¿Situación\ncambiable?', color: { background: '#FDE74C', border: '#000' }, font: { color: '#000', size: 12, face: 'Space Grotesk' }, borderWidth: 3, margin: 11, shape: 'box' },
+
+      { id: 'FSI', label: 'Resolver\nproblema', color: { background: '#5BC0EB', border: '#000' }, font: { color: '#fff', size: 11, face: 'Space Grotesk' }, borderWidth: 3, margin: 10, shape: 'box' },
+      { id: 'FSI1', label: 'Identificar', color: { background: '#87D1F0', border: '#000' }, font: { color: '#000', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 8, shape: 'box' },
+      { id: 'FSI2', label: 'Evaluar\nsolución', color: { background: '#87D1F0', border: '#000' }, font: { color: '#000', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 8, shape: 'box' },
+      { id: 'FSI3', label: 'Decidir\ny actuar', color: { background: '#87D1F0', border: '#000' }, font: { color: '#000', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 8, shape: 'box' },
+
+      { id: 'FNO', label: 'Afrontar\nsentimiento', color: { background: '#9BC53D', border: '#000' }, font: { color: '#fff', size: 11, face: 'Space Grotesk' }, borderWidth: 3, margin: 10, shape: 'box' },
+      { id: 'FNO1', label: 'Evitación', color: { background: '#B5D870', border: '#000' }, font: { color: '#000', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 8, shape: 'box' },
+      { id: 'FNO2', label: 'Revaluación', color: { background: '#B5D870', border: '#000' }, font: { color: '#000', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 8, shape: 'box' },
+      { id: 'FNO3', label: 'Distanciamiento', color: { background: '#B5D870', border: '#000' }, font: { color: '#000', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 8, shape: 'box' },
+      { id: 'FNO4', label: 'Negación', color: { background: '#B5D870', border: '#000' }, font: { color: '#000', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 8, shape: 'box' },
+      { id: 'FNO5', label: 'Ilusión', color: { background: '#B5D870', border: '#000' }, font: { color: '#000', size: 10, face: 'Space Grotesk' }, borderWidth: 3, margin: 8, shape: 'box' },
+    ]);
+
+    const edges = new vis.DataSet([
+      // A → NIVEL 1
+      { from: 'A', to: 'B', label: 'es', font: { size: 10, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 3, color: { color: '#000' }, smooth: { type: 'curvedCW', roundness: 0.1 } },
+      { from: 'A', to: 'C', label: 'contiene', font: { size: 10, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 3, color: { color: '#000' }, smooth: { type: 'curvedCW', roundness: 0.1 } },
+      { from: 'A', to: 'D', label: 'se basa en', font: { size: 10, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 3, color: { color: '#000' }, smooth: { type: 'curvedCW', roundness: 0.1 } },
+
+      // C → ELEMENTOS
+      { from: 'C', to: 'C1', label: '1', font: { size: 9, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#000' } },
+      { from: 'C', to: 'C2', label: '2', font: { size: 9, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#000' } },
+      { from: 'C', to: 'C3', label: '3', font: { size: 9, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#000' } },
+      { from: 'C', to: 'C4', label: '4', font: { size: 9, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#000' } },
+      { from: 'C', to: 'C5', label: '5', font: { size: 9, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#000' } },
+      { from: 'C', to: 'C6', label: '6', font: { size: 9, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#000' } },
+
+      // D → FENÓMENOS / AFRONTAMIENTO
+      { from: 'D', to: 'E', label: 'se divide en', font: { size: 10, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 3, color: { color: '#000' } },
+      { from: 'D', to: 'F', label: 'requiere', font: { size: 10, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 3, color: { color: '#000' } },
+
+      // E → EMOCIONES / ÁNIMO / SENTIMIENTOS
+      { from: 'E', to: 'EMO', label: 'clasifica', font: { size: 9, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#000' } },
+      { from: 'E', to: 'ANIMO', label: 'clasifica', font: { size: 9, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#000' } },
+      { from: 'E', to: 'SENT', label: 'clasifica', font: { size: 9, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#000' } },
+
+      // EMOCIONES → ATRIBUTOS
+      { from: 'EMO', to: 'EMO1', label: 'son', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'EMO', to: 'EMO2', label: 'dan', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'EMO', to: 'EMO3', label: 'son', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'EMO', to: 'EMO4', label: 'tipos', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'EMO4', to: 'EMO5', label: 'derivan en', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' }, dashes: [5, 3] },
+
+      // ÁNIMO → ATRIBUTOS
+      { from: 'ANIMO', to: 'ANIMO1', label: 'son', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'ANIMO', to: 'ANIMO2', label: 'por', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'ANIMO', to: 'ANIMO3', label: 'como', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+
+      // SENTIMIENTOS → ATRIBUTOS
+      { from: 'SENT', to: 'SENT1', label: 'son', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'SENT', to: 'SENT2', label: 'nacen de', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'SENT', to: 'SENT3', label: 'expresan', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'SENT', to: 'SENT4', label: 'son', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+
+      // RELACIONES ENTRE EMOCIÓN / ÁNIMO / SENTIMIENTO
+      { from: 'EMO', to: 'ANIMO', label: 'se alargan en', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#888' }, dashes: [5, 4] },
+      { from: 'ANIMO', to: 'SENT', label: 'se fijan en', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#888' }, dashes: [5, 4] },
+      { from: 'EMO', to: 'SENT', label: 'alimentan a', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#888' }, dashes: [5, 4] },
+
+      // F → ¿CAMBIABLE?
+      { from: 'F', to: 'FQ', label: 'depende de', font: { size: 10, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 3, color: { color: '#000' } },
+
+      // ¿CAMBIABLE? → RAMAS
+      { from: 'FQ', to: 'FSI', label: 'sí', font: { size: 11, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 3, color: { color: '#29ABE2' } },
+      { from: 'FQ', to: 'FNO', label: 'no', font: { size: 11, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 3, color: { color: '#9BC53D' } },
+
+      // RESOLVER PROBLEMA → PASOS
+      { from: 'FSI', to: 'FSI1', label: '1º', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'FSI1', to: 'FSI2', label: '2º', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'FSI2', to: 'FSI3', label: '3º', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'FSI3', to: 'FQ', label: 'si falla', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#888' }, dashes: [4, 3] },
+
+      // AFRONTAR SENTIMIENTO → ESTRATEGIAS
+      { from: 'FNO', to: 'FNO1', label: 'evitar', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'FNO', to: 'FNO2', label: 'revalorar', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'FNO', to: 'FNO3', label: 'distanciar', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'FNO', to: 'FNO4', label: 'negar', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+      { from: 'FNO', to: 'FNO5', label: 'ilusionar', font: { size: 8, face: 'JetBrains Mono', strokeWidth: 2, strokeColor: '#fff', align: 'middle' }, arrows: 'to', width: 2, color: { color: '#555' } },
+    ]);
+
+    const container = document.getElementById('cy');
+    const data = { nodes, edges };
+    const options = {
+      nodes: {
+        shape: 'box',
+        shadow: {
+          enabled: true,
+          size: 0,
+          x: 4,
+          y: 4,
+          color: '#000',
+        },
+        font: { face: 'Space Grotesk', fontWeight: '700' },
       },
-      {
-        selector: 'node.hover',
-        style: {
-          'shadow-offset-x': 7,
-          'shadow-offset-y': 7,
-          'border-width': 4,
-        }
+      edges: {
+        font: { face: 'JetBrains Mono', align: 'middle' },
+        smooth: { enabled: true, type: 'curvedCW', roundness: 0.15 },
       },
-      {
-        selector: 'edge',
-        style: {
-          'width': 3,
-          'line-color': '#000',
-          'target-arrow-color': '#000',
-          'target-arrow-shape': 'triangle',
-          'arrow-scale': 1.2,
-          'curve-style': 'bezier',
-          'label': 'data(label)',
-          'color': '#1a1a1a',
-          'font-family': 'JetBrains Mono, monospace',
-          'font-size': 9,
-          'font-weight': 700,
-          'text-background-color': '#fff',
-          'text-background-opacity': 1,
-          'text-background-padding': 3,
-          'text-background-shape': 'roundrectangle',
-          'text-rotation': 'autorotate',
-          'text-margin-y': -3,
-          'target-distance-from-node': 6,
-          'source-distance-from-node': 6,
-        }
+      physics: {
+        enabled: true,
+        solver: 'forceAtlas2Based',
+        forceAtlas2Based: {
+          gravitationalConstant: -60,
+          springConstant: 0.02,
+          springLength: 180,
+          damping: 0.6,
+        },
+        stabilization: { iterations: 250, updateInterval: 20 },
+        timestep: 0.35,
       },
-      {
-        selector: 'edge[style = "dashed"]',
-        style: {
-          'line-style': 'dashed',
-          'line-dash-pattern': [6, 4],
-        }
+      layout: { improvedLayout: true },
+      interaction: {
+        dragNodes: true,
+        dragView: true,
+        zoomView: true,
+        hover: true,
+        tooltipDelay: 200,
       },
-      {
-        selector: 'edge.hover',
-        style: {
-          'width': 4,
-          'line-color': '#FDE74C',
-        }
-      },
-    ];
+      configure: { enabled: false },
+    };
 
-    let cy;
+    const network = new vis.Network(container, data, options);
 
-    function makeMap(idx) {
-      const el = document.getElementById('cyContainer');
-      el.innerHTML = '';
-      if (cy) cy.destroy();
-      document.getElementById('mapDesc').innerHTML = maps[idx].desc;
-      setTimeout(() => {
-        cy = cytoscape({
-          container: el,
-          elements: maps[idx].elements,
-          style: cyStyle,
-          layout: {
-            name: 'dagre',
-            rankDir: 'TB',
-            nodeSep: 40,
-            rankSep: 70,
-            edgeSep: 15,
-            spacingFactor: 1.2,
-            animate: true,
-            animationDuration: 500,
-            animationEasing: 'ease-out',
-          },
-          minZoom: 0.4,
-          maxZoom: 2.5,
-          wheelSensitivity: 0.3,
-        });
-        cy.on('mouseover', 'node', function(e) {
-          const n = e.target;
-          n.addClass('hover');
-          n.connectedEdges().addClass('hover');
-          n.connectedEdges().connectedNodes().addClass('hover');
-        });
-        cy.on('mouseout', 'node', function() {
-          cy.elements().removeClass('hover');
-        });
-        cy.on('layoutready', () => setTimeout(() => cy.fit(60), 150));
-      }, 60);
-    }
-
-    document.querySelectorAll('.tab-btn').forEach(b => {
-      b.addEventListener('click', function() {
-        document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
-        this.classList.add('active');
-        makeMap(parseInt(this.dataset.map));
-      });
+    network.on('stabilizationProgress', function(params) {
+      const pct = params.iterations / params.total;
+      container.style.opacity = 0.4 + pct * 0.6;
+    });
+    network.once('stabilizationIterationsDone', function() {
+      container.style.opacity = 1;
+      network.setOptions({ physics: { enabled: false } });
     });
 
-    makeMap(0);
+    network.on('hoverNode', function(params) {
+      const { node } = params;
+      const connected = network.getConnectedNodes(node);
+      const connEdges = network.getConnectedEdges(node);
+      nodes.forEach(n => {
+        const id = n.id;
+        if (id === node || connected.includes(id)) {
+          nodes.update({ id, opacity: 1.0 });
+        } else {
+          nodes.update({ id, opacity: 0.25 });
+        }
+      });
+      edges.forEach(e => {
+        edges.update({ id: e.id, color: connEdges.includes(e.id) ? { color: '#000', highlight: '#fde74c' } : { color: '#ddd' } });
+      });
+    });
+    network.on('blurNode', function() {
+      nodes.forEach(n => nodes.update({ id: n.id, opacity: 1.0 }));
+      edges.forEach(e => edges.update({ id: e.id, color: { color: '#000' } }));
+    });
   </script>
 </body>
 </html>
