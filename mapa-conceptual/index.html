@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapa Conceptual · Estados Afectivos · NEM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <style>
+    /* ---------- RESET ---------- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: #f5f0eb;
+      color: #1a1a1a;
+      padding: 2rem 1rem;
+      line-height: 1.5;
+    }
+
+    /* ---------- LAYOUT ---------- */
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* ---------- NEOBRUTALIST BLOCKS ---------- */
+    .block {
+      border: 4px solid #000;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      background: #fff;
+      box-shadow: 8px 8px 0 #000;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .block:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 12px 12px 0 #000;
+    }
+    .block--yellow { background: #fde74c; }
+    .block--pink { background: #ff6b9d; }
+    .block--cyan { background: #5bc0eb; }
+    .block--lime { background: #9bc53d; color: #000; }
+    .block--orange { background: #f79256; }
+    .block--purple { background: #7b5ea7; color: #fff; }
+    .block--gray { background: #1a1a1a; color: #fff; border-color: #fff; box-shadow: 8px 8px 0 #555; }
+    .block--gray:hover { box-shadow: 12px 12px 0 #555; }
+
+    .block--rot-right { transform: rotate(0.8deg); }
+    .block--rot-right:hover { transform: rotate(0.8deg) translate(-2px, -2px); }
+    .block--rot-left { transform: rotate(-0.6deg); }
+    .block--rot-left:hover { transform: rotate(-0.6deg) translate(-2px, -2px); }
+
+    /* ---------- TYPOGRAPHY ---------- */
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+    h2 .highlight { background: #fde74c; padding: 0 0.3rem; border: 2px solid #000; }
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    p, li { font-size: 1rem; margin-bottom: 0.6rem; }
+    a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { background: #fde74c; }
+    .tag {
+      display: inline-block;
+      border: 2px solid #000;
+      padding: 0.2rem 0.6rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-right: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ---------- MERMAID ---------- */
+    .mermaid-wrap {
+      background: #fff;
+      border: 3px solid #000;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+      min-height: 200px;
+    }
+    .mermaid-wrap svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+
+    /* ---------- TABLE ---------- */
+    .table-wrap {
+      overflow-x: auto;
+      border: 3px solid #000;
+      background: #fff;
+      margin: 1.5rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th, td {
+      border: 2px solid #000;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background: #1a1a1a;
+      color: #fff;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    tr:nth-child(even) td { background: #f5f0eb; }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .hero .subtitle {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 500;
+      max-width: 700px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ---------- TOC ---------- */
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .toc-list li a {
+      display: block;
+      border: 3px solid #000;
+      padding: 0.6rem 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      background: #fff;
+      box-shadow: 4px 4px 0 #000;
+      transition: 0.1s;
+      font-size: 0.85rem;
+    }
+    .toc-list li a:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 #000;
+      background: #fde74c;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      padding: 2rem 0;
+      border-top: 4px solid #000;
+      margin-top: 3rem;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 600px) {
+      body { padding: 1rem 0.5rem; }
+      .block { padding: 1rem; }
+      .block--rot-right, .block--rot-left { transform: none; }
+      .block--rot-right:hover, .block--rot-left:hover { transform: translate(-2px, -2px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+      <div class="block block--yellow block--rot-right">
+        <h1>Estados<br/>Afectivos</h1>
+        <p class="subtitle">
+          Mapa conceptual de la secci&oacute;n 2.2 del documento oficial <em>Educaci&oacute;n Socioemocional en el marco de la Nueva Escuela Mexicana</em> (SEP, 2024). Taxonom&iacute;a de emociones, estados de &aacute;nimo y sentimientos con estrategias de afrontamiento.
+        </p>
+        <div class="hero-meta">
+          <span class="tag">SEP 2024</span>
+          <span class="tag">NEM</span>
+          <span class="tag">Damasio</span>
+          <span class="tag">Lazarus</span>
+          <span class="tag">Novak</span>
+          <span class="tag">#estilo-neobrutalista</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ INTRO ============ -->
+    <div class="block block--gray">
+      <p style="font-size:1.1rem;font-weight:500;">
+        &ldquo;A diferencia de un mindmap (asociaci&oacute;n libre) o un flowchart (proceso secuencial), 
+        un mapa conceptual es una representaci&oacute;n jer&aacute;rquica de <strong>proposiciones</strong>: 
+        cada conexi&oacute;n entre dos conceptos incluye una <strong>palabra de enlace</strong> que forma 
+        un enunciado con sentido.&rdquo;
+      </p>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;margin-top:0.5rem;">
+        &mdash; Novak (1984), basado en la teor&iacute;a de asimilaci&oacute;n de Ausubel
+      </p>
+    </div>
+
+    <!-- ============ TOC ============ -->
+    <nav class="block block--rot-left" style="background:#e8e0d5;">
+      <h2><span class="highlight">&Iacute;ndice</span></h2>
+      <ul class="toc-list">
+        <li><a href="#mapa1">1. Estructura ESE</a></li>
+        <li><a href="#mapa2">2. Fen&oacute;menos Afectivos</a></li>
+        <li><a href="#mapa3">3. Afrontamiento</a></li>
+        <li><a href="#tabla">4. Tabla comparativa</a></li>
+      </ul>
+    </nav>
+
+    <!-- ============ MAPA 1 ============ -->
+    <section id="mapa1">
+      <div class="block block--cyan">
+        <h2><span class="highlight">Mapa 1</span> Estructura de la Educaci&oacute;n Socioemocional</h2>
+        <p>Secciones 2.1 y 2.2 del documento. El concepto ra&iacute;z es <em>Educaci&oacute;n Socioemocional NEM</em>, que <strong>se define como</strong> un proceso gradual, <strong>se compone de</strong> elementos esenciales y <strong>se fundamenta en</strong> el conocimiento de los estados afectivos.</p>
+      </div>
+      <div class="mermaid-wrap">
+        <pre class="mermaid">
+flowchart TB
+    A["Educacion Socioemocional&lt;br/&gt;NEM"] -->|"se define como"| B["Proceso gradual para&lt;br/&gt;desarrollar habilidades"]
+    A -->|"se compone de"| C["Elementos esenciales&lt;br/&gt;(2.1)"]
+    A -->|"se fundamenta en"| D["Conocimiento de los&lt;br/&gt;Estados Afectivos (2.2)"]
+
+    C -->|"incluye"| C1["Conocimiento&lt;br/&gt;de si"]
+    C -->|"incluye"| C2["Conocimiento de&lt;br/&gt;Estados Afectivos"]
+    C -->|"incluye"| C3["Cuidado de si&lt;br/&gt;y de otros"]
+    C -->|"incluye"| C4["Proyecto&lt;br/&gt;de vida"]
+    C -->|"incluye"| C5["Habilidades&lt;br/&gt;Sociales"]
+    C -->|"incluye"| C6["Educacion Integral&lt;br/&gt;en Sexualidad"]
+
+    C2 -.->|"se desarrolla en"| D
+
+    D -->|"se divide en"| E["Fenomenos&lt;br/&gt;Afectivos"]
+    D -->|"requiere"| F["Afrontamiento"]
+
+    E -->|"clasifica"| G["Emociones"]
+    E -->|"clasifica"| H["Estados de&lt;br/&gt;Animo"]
+    E -->|"clasifica"| I["Sentimientos"]
+
+    F -->|"se bifurca segun"| J["?La situacion&lt;br/&gt;se puede cambiar?"]
+    J -->|"si"| K["Resolucion de&lt;br/&gt;Problemas"]
+    J -->|"no"| L["Afrontamiento centrado&lt;br/&gt;en Sentimientos"]
+
+    linkStyle 0,1,2 fill:none
+    linkStyle 3,4,5,6,7,8 fill:none
+    linkStyle 9,10 fill:none
+    linkStyle 11,12,13 fill:none
+    linkStyle 14,15 fill:none
+
+    style A fill:#662D91,color:#fff
+    style D fill:#F7931E,color:#fff
+    style E fill:#29ABE2,color:#fff
+    style F fill:#39B54A,color:#fff
+        </pre>
+      </div>
+    </section>
+
+    <!-- ============ MAPA 2 ============ -->
+    <section id="mapa2">
+      <div class="block block--pink block--rot-right">
+        <h2><span class="highlight">Mapa 2</span> Fen&oacute;menos Afectivos</h2>
+        <p>Proposiciones que distinguen <strong>emociones</strong> (intensas, breves, universales), <strong>estados de &aacute;nimo</strong> (difusos, duraderos, multicausales) y <strong>sentimientos</strong> (privados, intencionales, basados en significado personal). Las flechas punteadas muestran la relaci&oacute;n temporal entre los tres fen&oacute;menos.</p>
+      </div>
+      <div class="mermaid-wrap">
+        <pre class="mermaid">
+flowchart TB
+    A["Emociones"] -->|"se caracterizan por ser"| A1["Intensas&lt;br/&gt;y breves"]
+    A -->|"tienen funcion de"| A2["Respuesta inmediata&lt;br/&gt;ante amenaza u&lt;br/&gt;oportunidad"]
+    A -->|"se expresan"| A3["Publicamente&lt;br/&gt;(rostro, cuerpo)"]
+    A -->|"son"| A4["Universales&lt;br/&gt;(compartidas por toda&lt;br/&gt;la especie humana)"]
+    A -->|"se clasifican en"| A5["Basicas: alegria, tristeza,&lt;br/&gt;miedo, enojo, sorpresa, asco"]
+    A5 -->|"se modulan por intensidad&lt;br/&gt;y dan origen a"| A6["Secundarias: familias&lt;br/&gt;de emociones (ej: enojo&lt;br/&gt;va de molestia a furia)"]
+
+    B["Estados de Animo"] -->|"se caracterizan por ser"| B1["Menos intensos&lt;br/&gt;y mas duraderos&lt;br/&gt;que las emociones"]
+    B -->|"son causados por"| B2["Factores multiples:&lt;br/&gt;internos (hambre, sueno,&lt;br/&gt;estres) y externos&lt;br/&gt;(clima, contaminacion)"]
+    B -->|"funcionan como"| B3["Indicadores de la&lt;br/&gt;disposicion del cuerpo&lt;br/&gt;para actuar o descansar"]
+    B -->|"influyen en"| B4["La conducta y la&lt;br/&gt;forma de pensar&lt;br/&gt;de forma sostenida"]
+
+    C["Sentimientos"] -->|"se caracterizan por ser"| C1["Duraderos, estables&lt;br/&gt;y de baja intensidad"]
+    C -->|"son"| C2["Privados e&lt;br/&gt;intencionales&lt;br/&gt;(dirigidos a un objeto&lt;br/&gt;o persona especifica)"]
+    C -->|"surgen de"| C3["Emocion + reflexion&lt;br/&gt;+ memoria +&lt;br/&gt;significado personal"]
+    C -->|"expresan"| C4["La 'firma personal':&lt;br/&gt;lo que cada quien&lt;br/&gt;considera importante&lt;br/&gt;en la vida"]
+    C -->|"son"| C5["Creencias con base&lt;br/&gt;en valoraciones&lt;br/&gt;personales"]
+
+    A -.->|"se prolongan en"| B
+    B -.->|"se consolidan en"| C
+    A -.->|"son materia prima de"| C
+
+    style A fill:#29ABE2,color:#fff
+    style B fill:#F7931E,color:#fff
+    style C fill:#39B54A,color:#fff
+        </pre>
+      </div>
+      <div class="block block--yellow" style="margin-top:1rem;">
+        <p style="font-weight:700;font-family:'JetBrains Mono',monospace;">
+          Proposiciones clave &rarr; las emociones <em>se prolongan en</em> estados de &aacute;nimo; los estados de &aacute;nimo <em>se consolidan en</em> sentimientos; las emociones <em>son materia prima de</em> los sentimientos.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ MAPA 3 ============ -->
+    <section id="mapa3">
+      <div class="block block--orange block--rot-left">
+        <h2><span class="highlight">Mapa 3</span> Estrategias de Afrontamiento</h2>
+        <p>El nodo central es la <strong>valoraci&oacute;n</strong> de si la situaci&oacute;n se puede cambiar. La bifurcaci&oacute;n produce dos rutas: <em>resoluci&oacute;n de problemas</em> (cuando hay agencia) o <em>afrontamiento centrado en sentimientos</em> (cuando no). La flecha de retroalimentaci&oacute;n en la rama de resoluci&oacute;n indica que si la estrategia no funciona, se revalora.</p>
+      </div>
+      <div class="mermaid-wrap">
+        <pre class="mermaid">
+flowchart TB
+    A["Situacion que&lt;br/&gt;genera afecto"] -->|"requiere"| B["Valoracion:&lt;br/&gt;?la situacion&lt;br/&gt;se puede cambiar?"]
+    B -->|"si se puede cambiar&lt;br/&gt;--&gt; se activa"| C["Resolucion de&lt;br/&gt;Problemas"]
+    B -->|"no se puede cambiar&lt;br/&gt;--&gt; se activa"| D["Afrontamiento centrado&lt;br/&gt;en Sentimientos"]
+
+    C -->|"consiste en"| C1["Identificar el&lt;br/&gt;problema"]
+    C1 -->|"luego"| C2["Valorar si tiene&lt;br/&gt;solucion"]
+    C2 -->|"luego"| C3["Decidir acciones&lt;br/&gt;especificas"]
+    C3 -->|"luego"| C4["Ejecutar y&lt;br/&gt;evaluar resultado"]
+    C4 -->|"si no funciona"| B
+
+    D -->|"incluye"| D1["Evitacion:&lt;br/&gt;no pensar en&lt;br/&gt;el problema"]
+    D -->|"incluye"| D2["Revaluacion:&lt;br/&gt;cambiar el significado&lt;br/&gt;personal de lo que pasa"]
+    D -->|"incluye"| D3["Distanciamiento:&lt;br/&gt;alejarse emocionalmente&lt;br/&gt;de la situacion"]
+    D -->|"incluye"| D4["Negacion:&lt;br/&gt;rechazar la realidad&lt;br/&gt;atemorizante"]
+    D -->|"incluye"| D5["Ilusion:&lt;br/&gt;desear que las cosas&lt;br/&gt;fueran diferentes"]
+
+    D1 -.->|"puede ser"| E["Util si nada puede&lt;br/&gt;hacerse; debil porque&lt;br/&gt;no resuelve la causa"]
+    D2 -.->|"es la mas"| E2["Poderosa y duradera&lt;br/&gt;porque cambia la&lt;br/&gt;interpretacion, no los hechos"]
+    D3 -.->|"es necesaria para"| E3["Profesiones de ayuda:&lt;br/&gt;medicos, psicologos,&lt;br/&gt;docentes"]
+    D4 -.->|"puede ser"| E4["Protectora en trauma&lt;br/&gt;pero peligrosa si&lt;br/&gt;impide ver la realidad"]
+    D5 -.->|"promueve"| E5["Tolerancia, resiliencia&lt;br/&gt;y esperanza ante&lt;br/&gt;injusticias"]
+
+    style A fill:#662D91,color:#fff
+    style B fill:#F7931E,color:#fff
+    style C fill:#29ABE2,color:#fff
+    style D fill:#39B54A,color:#fff
+        </pre>
+      </div>
+      <div class="block block--gray" style="margin-top:1rem;">
+        <p style="font-weight:500;">
+          &ldquo;La clave para la regulaci&oacute;n de los sentimientos es la <strong>valoraci&oacute;n</strong> de la situaci&oacute;n, tanto de las circunstancias como de las condiciones y la personalidad del individuo, para que ayude a elegir la estrategia de afrontamiento adecuada.&rdquo;
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ TABLE ============ -->
+    <section id="tabla">
+      <div class="block block--purple block--rot-right">
+        <h2><span class="highlight" style="background:#fde74c;color:#000;">Tabla</span> Emoci&oacute;n vs Estado de &Aacute;nimo vs Sentimiento</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspecto</th>
+              <th>Emoci&oacute;n</th>
+              <th>Estado de &Aacute;nimo</th>
+              <th>Sentimiento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Duraci&oacute;n</strong></td><td>Corta (seg/min)</td><td>Media (horas/d&iacute;as)</td><td>Larga (d&iacute;as/a&ntilde;os)</td></tr>
+            <tr><td><strong>Intensidad</strong></td><td>Alta</td><td>Baja-media</td><td>Variable</td></tr>
+            <tr><td><strong>Causa</strong></td><td>Espec&iacute;fica y clara</td><td>M&uacute;ltiple y ambigua</td><td>Objeto/persona espec&iacute;fica</td></tr>
+            <tr><td><strong>Expresi&oacute;n</strong></td><td>Facial/corporal clara</td><td>Postura, comportamiento</td><td>No visible (privado)</td></tr>
+            <tr><td><strong>Funci&oacute;n</strong></td><td>Respuesta inmediata</td><td>Indicador de disposici&oacute;n</td><td>Vincularse, valorar</td></tr>
+            <tr><td><strong>Universalidad</strong></td><td>Universal</td><td>Influido por contexto</td><td>Personal/subjetivo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ SOURCES ============ -->
+    <div class="block block--lime block--rot-left">
+      <h2><span class="highlight">Fuentes</span></h2>
+      <ul style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;">
+        <li>SEP (2024). <em>Cuadernos de apoyo curricular para la pr&aacute;ctica docente: Educaci&oacute;n Socioemocional en el marco de la NEM.</em></li>
+        <li>Damasio, A. (1994). <em>El error de Descartes.</em> Cr&iacute;tica.</li>
+        <li>Lazarus, R. S. &amp; Lazarus, B. N. (2000). <em>Pasi&oacute;n y raz&oacute;n.</em> Paid&oacute;s.</li>
+        <li>Izard, C. E. (2007). Basic emotions, natural kinds, emotion schemas. <em>Perspectives on Psychological Science, 2</em>, 260-280.</li>
+        <li>Novak, J. D. (1984). <em>Aprendiendo a aprender.</em></li>
+      </ul>
+    </div>
+
+    <footer class="footer">
+      <p>Mapa conceptual &middot; Educaci&oacute;n Socioemocional NEM &middot; Publicado desde <a href="https://github.com/HesusG/esencia-del-tutor" target="_blank">HesusG/esencia-del-tutor</a></p>
+      <p style="margin-top:0.3rem;">Estilo <strong>neobrutalista</strong> &mdash; sin ornamentos, sin excusas</p>
+    </footer>
+
+  </div>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      flowchart: { htmlLabels: true, useMaxWidth: true, curve: 'basis' },
+      securityLevel: 'loose',
+      fontFamily: 'Space Grotesk, sans-serif'
+    });
+  </script>
+</body>
+</html>
